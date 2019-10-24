@@ -11,10 +11,11 @@ cache:
    ~/.gradle/caches/
    ~/.gradle/wrapper/
 
-jobs: include:
-  - stage: compile
-  script: gradle compileJava
-  - stage: test
-  script: gradle test
-  - stage: jar
-  script: gradle jar
+jobs:
+  include:
+    - stage: compile
+      script: gradle compileJava
+    - stage: test
+      script: gradle test
+    - stage: jar
+      script: gradle jar
