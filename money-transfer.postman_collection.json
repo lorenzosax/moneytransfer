@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "f8fc2c3a-e20d-4103-9e2f-f16eaaeedea0",
+		"name": "MoneyTransfer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "bonifico.prepare",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/private/cliente/:customerId/conto/:bankAccountNumber/bonifico/prepare",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"private",
+						"cliente",
+						":customerId",
+						"conto",
+						":bankAccountNumber",
+						"bonifico",
+						"prepare"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "123"
+						},
+						{
+							"key": "bankAccountNumber",
+							"value": "0001234566"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bonifico.verify",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"data\": {\n\t\t\"amount\": {\n\t\t\t\"currencyCode\": \"EUR\",\n\t\t\t\"currency\": \"500.00\"\n\t\t},\n\t\t\"executionDate\": \"08/06/2019\",\n\t\t\"beneficiaryName\": \"Mario Rossi\",\n\t\t\"beneficiaryIban\": \"IT60X0542811101000000123456\",\n\t\t\"paymentReason\": \"Acquisto auto\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/private/cliente/:customerId/conto/:bankAccountNumber/bonifico/verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"private",
+						"cliente",
+						":customerId",
+						"conto",
+						":bankAccountNumber",
+						"bonifico",
+						"verify"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "123"
+						},
+						{
+							"key": "bankAccountNumber",
+							"value": "0001234566"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bonifico.execute",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"data\": {\n\t\t\"amount\": {\n\t\t\t\"currencyCode\": \"EUR\",\n\t\t\t\"currency\": \"100.00\"\n\t\t},\n\t\t\"executionDate\": \"08/06/2019\",\n\t\t\"beneficiaryName\": \"Maria Di Paola\",\n\t\t\"beneficiaryIban\": \"IT60X0542811101000000123456\",\n\t\t\"paymentReason\": \"Acquisto auto\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/private/cliente/:customerId/conto/:bankAccountNumber/bonifico/:trxId/execute",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"private",
+						"cliente",
+						":customerId",
+						"conto",
+						":bankAccountNumber",
+						"bonifico",
+						":trxId",
+						"execute"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "123"
+						},
+						{
+							"key": "bankAccountNumber",
+							"value": "0001234566"
+						},
+						{
+							"key": "trxId",
+							"value": "0d265938-a39a-47a6-8469-f5da77dff9aa"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
