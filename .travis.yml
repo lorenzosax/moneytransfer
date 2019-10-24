@@ -27,5 +27,5 @@ deploy:
   on:
     branch: master
 
-after_deploy:
+after_success:
   script: ssh root@206.81.16.40 "java -jar -Dspring.profiles.active=prod /opt/apps/money-transfer/moneytransfer-0.0.1-SNAPSHOT.jar"
