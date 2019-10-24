@@ -1,0 +1,29 @@
+management:
+    endpoints:
+        web:
+            base-path: /manage
+            exposure:
+                include: shutdown,info,health
+    endpoint:
+        shutdown:
+            enabled: true
+spring:
+    datasource:
+        hikari:
+            connection-test-query: SELECT 1
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/money_transfer
+        username: root
+        password: ''
+    jpa:
+        database: mysql
+        open-in-view: false
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5Dialect
+
+#logging.level.org.springframework.web.servlet.mvc.method.annotation=TRACE
+#spring.resources.static-locations=classpath:public
+#spring.datasource.schema=schema-mysql.sql
+#spring.datasource.data=data.sql
+#spring.jpa.hibernate.ddl-auto=update
