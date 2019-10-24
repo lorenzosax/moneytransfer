@@ -23,9 +23,9 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/libs/ root@206.81.16.40:/opt/apps
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/libs/ root@206.81.16.40:/opt/apps/money-transfer
   on:
     branch: master
 
 after_deploy:
-  script: ssh root@206.81.16.40 "java -jar /opt/apps/moneytransfer-0.0.1-SNAPSHOT.jar"
+  script: ssh root@206.81.16.40 "java -jar -Dspring.profiles.active=prod /opt/apps/money-transfer/moneytransfer-0.0.1-SNAPSHOT.jar"
