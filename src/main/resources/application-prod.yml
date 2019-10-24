@@ -13,8 +13,8 @@ spring:
             connection-test-query: SELECT 1
         driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://127.0.0.1:3306/money_transfer
-        username: root
-        password: ''
+        username: app_moneytransfer_user
+        password: password
     jpa:
         database: mysql
         open-in-view: false
