@@ -9,7 +9,7 @@ spring:
         hikari:
             connection-test-query: SELECT 1
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://206.81.16.40:3306/money_transfer
+        url: jdbc:mysql://127.0.0.1:3306/money_transfer
         username: app_moneytransfer_user
         password: password
     jpa:
