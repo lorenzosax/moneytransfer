@@ -1,0 +1,2 @@
+rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/libs/ root@206.81.16.40:/opt/apps/money-transfer
+ssh root@206.81.16.40 "mkdir /opt/test && java -jar -Dspring.profiles.active=prod /opt/apps/money-transfer/moneytransfer-0.0.1-SNAPSHOT.jar"
