@@ -28,4 +28,4 @@ deploy:
     branch: master
 
 after_deploy:
-  - ./scripts/run_application.sh
+  - scripts/run_application.sh
