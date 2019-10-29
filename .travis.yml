@@ -23,6 +23,9 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: bash scripts/deploy.sh
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/libs/ root@206.81.16.40:/opt/apps/money-transfer
   on:
     branch: master
+
+after_deploy:
+  - ./scripts/run_application.sh
