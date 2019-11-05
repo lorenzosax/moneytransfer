@@ -8,8 +8,9 @@ notifications:
 
 cache:
  directories:
-   ~/.gradle/caches/
-   ~/.gradle/wrapper/
+   - ~/.gradle/caches/
+   - ~/.gradle/wrapper/
+   - ~/moneytransfer-ui/node_modules
 
 addons:
   ssh_known_hosts: 206.81.16.40
