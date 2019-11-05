@@ -1,0 +1,47 @@
+<article>
+  <h1>Bank - Tech Interview Assignment</h1>
+  <p>Candidate: <em>Lorenzo Gagliani</em></p>
+  <p>A small application developed for a Bank technical interview.</p>
+  <p>Technologies used:</p>
+  <h5>Backend: <em><strong>SpringBoot applications</strong>, version 2.1.5.RELEASE</em></h5>
+  <h5>Frontend: <em><strong>Angular applications</strong>, version 8</em></h5>
+  <p><em>For all the details regarding the specifications it is possible to consult the pdf: <strong>tech_interview_test.pdf</strong></em>
+  </p>
+  <p><em>You can find a postman collection with all the endpoints developed in root folder: <strong>money-transfer.postman_collection.json</strong></em>
+  </p>
+  <h2>Getting Started</h2>
+  <h3>Installing and Deployment</h3>
+  <p>The Project is composed by one parent pom that import two modules:</p>
+  <ul>
+    <li>moneytransfer-server</li>
+    <li>moneytransfer-web</li>
+  </ul>
+  <p>the first contain the backend code (REST API) and the second contain the client side application (that use API
+    exposed from server)</p>
+  <p>Project requires <a href="https://maven.apache.org/docs/3.5.0/release-notes.html" target="_blank" rel="nofollow">Maven</a> v. 3.5.0 to run.</p>
+  <p>On root folder run:</p>
+  <div class="highlight highlight-source-shell">
+    <pre>$ mvn clean install</pre>
+  </div>
+  <p>this command will generate the <em>moneytransfer-app.war file</em>.</p>
+  <p>Move to <strong>moneytransfer-server</strong> directory and run:</p>
+  <div class="highlight highlight-source-shell">
+    <pre>$ mvn spring-boot:run</pre>
+  </div>
+  <p>Now you use the application on <code>http://localhost:8080/</code></p>
+  <h3><em>Database access:</em></h3>
+  <p>The application provided is configured to automatically use the in-memory database H2 and to automatically create
+    the tables at startup time for every domain entity modelled.</p>
+  <p>Whenever you restart the application, the database will be reset.
+    To access its database administration panel, open the following url in the browser after having started the
+    application:</p>
+  <ul>
+    <li><a href="http://localhost:8080/h2/" rel="nofollow">http://localhost:8080/h2/</a></li>
+  </ul>
+  <p>And use for the databaseURL: <strong>jdbc:h2:mem:bank</strong></p>
+  <h2>Authors</h2>
+  <ul>
+    <li><strong>Lorenzo Gagliani</strong> - <em>Initial work</em> - <a
+      href="https://github.com/lorenzosax" target="_blank">lorenzosax</a></li>
+  </ul>
+</article>

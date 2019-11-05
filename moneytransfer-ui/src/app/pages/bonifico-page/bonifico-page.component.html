@@ -1,0 +1,164 @@
+<div class="bonifico-container">
+  <h1>Bonifico</h1>
+  <div *ngIf="!isFinalState">
+    <div [hidden]="submitted">
+      <form (ngSubmit)="submitForm()" #bonificoForm="ngForm">
+        <div class="form-group">
+          <p>Conto: <b>{{baseInfo?.accountNumber}}</b> - {{baseInfo?.fullName}}</p>
+        </div>
+
+        <div class="form-group">
+          <label for="beneficiary">Beneficiario*</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="beneficiary" name="beneficiaryName" [(ngModel)]="form.beneficiaryName" autocomplete="off" required>
+            <div class="invalid-feedback">
+              Beneficiario obbligatorio.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="iban">IBAN*</label>
+          <div class="input-group mb-3">
+            <input minlength="15" maxlength="32" type="text" class="form-control" id="iban" name="beneficiaryIban" [(ngModel)]="form.beneficiaryIban" autocomplete="off" required>
+            <div class="invalid-feedback">
+              Inserire un IBAN valido (min-max 15-32 caratteri).
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Importo*</label>
+          <div class="input-group mb-3">
+            <input type="number" min="1" class="form-control" id="amount" name="currency" [(ngModel)]="form.amount" autocomplete="off" required>
+            <div class="input-group-prepend">
+              <span class="input-group-text">{{form.currencyCode}}</span>
+            </div>
+            <div class="invalid-feedback">
+              Importo obbligatorio.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="executionDate">Data di esecuzione*</label>
+          <div class="input-group mb-3">
+            <input class="form-control"
+                   placeholder="dd/mm/yyyy"
+                   id="executionDate"
+                   name="executionDate"
+                   [placement]="'bottom'"
+                   [readonly]="false"
+                   (click)="d.toggle()"
+                   [maxDate]="executionDateMax"
+                   [minDate]="executionDateMin"
+                   [disabled]="false"
+                   onkeydown="return false"
+                   ngbDatepicker
+                   #d="ngbDatepicker"
+                   [(ngModel)]="form.executionDate"
+                   autocomplete="off">
+            <div class="input-group-prepend">
+            <span class="input-group-text" (click)="d.toggle()" style="cursor: pointer">
+              <fa-icon class="app-icon" icon="calendar"></fa-icon>
+            </span>
+            </div>
+            <div class="invalid-feedback">
+              Data di esecuzione obbligatoria.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="paymentReason">Causale*</label>
+          <div class="input-group mb-3">
+            <textarea maxlength="150" class="form-control" id="paymentReason" style="resize: none" rows="3" name="paymentReason" [(ngModel)]="form.paymentReason" autocomplete="off" required></textarea>
+            <div class="invalid-feedback">
+              Causale obbligatoria (massimo 150 caratteri).
+            </div>
+          </div>
+        </div>
+
+        <div class="center">
+          <button type="submit" class="btn btn-success" [disabled]="!bonificoForm.form.valid">PROSEGUI</button>
+        </div>
+
+      </form>
+    </div>
+    <div [hidden]="!submitted">
+      <app-summary-bonifico *ngIf="summaryVerifyBonifico"
+                            [data]="summaryVerifyBonifico.data"
+                            [transaction]="summaryVerifyBonifico.transaction"
+                            [status]="summaryVerifyBonifico.result.outcome"
+                            [messages]="summaryVerifyBonifico.result.messages"
+                            [isFinal]="isFinalState">
+      </app-summary-bonifico>
+      <h4>Verifica i dati e continua</h4>
+      <div class="row">
+        <div class="col-sm-12">
+          <p>Conto: <b>{{baseInfo?.accountNumber}}</b> - {{baseInfo?.fullName}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-5">
+          <p>Beneficiario:</p>
+        </div>
+        <div class="col-md-9 col-sm-7">
+          <b>{{form.beneficiaryName}}</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-5">
+          <p>IBAN:</p>
+        </div>
+        <div class="col-md-9 col-sm-7">
+          <b>{{form.beneficiaryIban}}</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-5">
+          <p>Importo:</p>
+        </div>
+        <div class="col-md-9 col-sm-7">
+          <b>{{form.amount}} {{form.currencyCode}}</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-5">
+          <p>Data di esecuzione:</p>
+        </div>
+        <div class="col-md-9 col-sm-7">
+          <b>{{form.executionDate | customDateString}}</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-5">
+          <p>Causale:</p>
+        </div>
+        <div class="col-md-9 col-sm-7">
+          <b>{{form.paymentReason}}</b>
+        </div>
+      </div>
+
+      <div class="center">
+        <button class="btn btn-secondary mr-5" (click)="back()">INDIETRO</button>
+        <button *ngIf="verifyButtonShowed" class="btn btn-success" (click)="verifyBonifico()">AVANTI</button>
+        <button *ngIf="isLastOperation" class="btn btn-success" (click)="executeBonifico()">CONFERMA</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isFinalState">
+    <app-summary-bonifico *ngIf="summaryExecuteBonifico"
+                          [data]="summaryExecuteBonifico.data"
+                          [status]="summaryExecuteBonifico.result.outcome"
+                          [messages]="summaryExecuteBonifico.result.messages"
+                          [isFinal]="isFinalState">
+    </app-summary-bonifico>
+    <div class="center">
+      <button class="btn btn-secondary mr-5" (click)="newBonifico()">NUOVO BONIFICO</button>
+    </div>
+  </div>
+</div>
+
+<app-loading-overlay [loading]="loading"></app-loading-overlay>

@@ -1,0 +1,51 @@
+/* Mixin */
+.vertical-align(@position: relative) {
+  position: @position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.top-bar {
+  height: 80px;
+  background-color: #fd0;
+  padding-left: 18px;
+  .logo {
+    width: 180px;
+    padding-top: 10px;
+    h2 {
+      color: white;
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+    small {
+      float: right;
+    }
+  }
+}
+
+.sub-bar {
+  height: 40px;
+  background-color: #333;
+  .menu {
+    float: right;
+    .vertical-align();
+    .item {
+      padding-left: 20px;
+      padding-right: 20px;
+      float: right;
+      a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .active {
+        padding-top: 5px;
+        text-decoration: underline;
+        text-underline-position: under;
+        color: #fff;
+      }
+    }
+  }
+}

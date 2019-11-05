@@ -1,0 +1,47 @@
+<div class="alert" [ngClass]="{
+    'alert-info': _status === 'SUCCESS',
+    'alert-warning': _status === 'WARNING',
+    'alert-danger':_status === 'ERROR'}">
+
+  <div *ngIf="!_isFinal">
+    <div *ngIf="_status === 'SUCCESS'">
+      <div class="row">
+        <div class="col-sm-12">
+          <p>ID Transazione: <b>{{_transaction.id}}</b></p>
+        </div>
+        <div class="col-sm-12">
+          <p>Importo: <b>{{_data.amount.currency + " " + _data.amount.currencyCode}}</b></p>
+        </div>
+        <div class="col-sm-12">
+          <p>Commissioni: <b>{{_data.commissions.amount + " " + _data.commissions.currencyCode}}</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="_isFinal">
+    <div class="row">
+      <div class="col-sm-12">
+        <p>CRO: <b>{{_data.cro}}</b></p>
+      </div>
+      <div class="col-sm-12">
+        <div *ngIf="_messages.length > 0">
+          <div *ngFor="let msg of _messages">
+            <p>{{msg}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="_status !== 'SUCCESS'">
+    <h5>
+      {{_status === 'ERROR' ? 'Errore' : 'Attenzione'}}
+    </h5>
+    <div *ngIf="_messages.length > 0">
+      <div *ngFor="let msg of _messages">
+        <p>{{msg}}</p>
+      </div>
+    </div>
+  </div>
+</div>

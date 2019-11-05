@@ -1,1 +1,3 @@
 rootProject.name = 'moneytransfer'
+
+include 'moneytransfer-api', 'moneytransfer-ui'

@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'DinLight';
+  src: url('assets/fonts/DIN-Light.ttf') format('truetype');
+}
+body {
+  font-family: Sans-Serif, serif;
+  font-size: 16px;
+  .btn {
+    color: #1f1f1f;
+    border-radius: 18px;
+    &.btn-success {
+      background-color: #fd0;
+      border-color: #fd0;
+      &:focus {
+        box-shadow: none;
+      }
+      &:not(:disabled):not(.disabled):active {
+        background-color: #ffd302;
+        border-color: #ffd302;
+        box-shadow: none;
+        color: #1f1f1f;
+      }
+      &:hover {
+        background-color: #ffd302;
+        border-color: #ffd302;
+        color: #1f1f1f;
+      }
+      &[disabled] {
+        background-color: #ccc;
+        border-color: #ccc;
+        color: #1f1f1f;
+      }
+    }
+    &.btn-secondary {
+      color: #fff;
+    }
+  }
+  .app-icon {
+    color: rgba(103,104,106,0.85);
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  input, textarea {
+    &.ng-touched.ng-invalid {
+      border-color: #da0200;
+      &~.invalid-feedback {
+        display: block;
+      }
+    }
+  }
+}
