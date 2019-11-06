@@ -16,8 +16,6 @@ addons:
   ssh_known_hosts: 206.81.16.40
 
 before_deploy:
-  on:
-    branch: master
   - openssl aes-256-cbc -K $encrypted_6d54636b4ab4_key -iv $encrypted_6d54636b4ab4_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/deploy_rsa
