@@ -17,8 +17,7 @@ script:
 addons:
   ssh_known_hosts: 206.81.16.40
 before_deploy:
-- openssl aes-256-cbc -K $encrypted_6d54636b4ab4_key -iv $encrypted_6d54636b4ab4_iv
-  -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- openssl aes-256-cbc -K $encrypted_6d54636b4ab4_key -iv $encrypted_6d54636b4ab4_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/deploy_rsa
 - ssh-add /tmp/deploy_rsa
@@ -29,7 +28,5 @@ deploy:
     root@206.81.16.40:/opt/apps/money-transfer
   on:
     branch: master
-  api_key:
-    secure: NHsf0hCsJni8PCVm/X5fMGdkXSsWvHL++R6TZlNfZt1E6Ho75fvH65aisGPYJwRKmzb03Py45yWrEuV3TzcWHrmQV3CipPfXw976ldIfD0TfHDtD8wm2OMRYEKwVHrH93pOEOwkIjw3XCBiaMEih1bBrVRs0NDY66gxlBbLFcs9pqoJa7I5Nd9DrbTe9y1Lx4LkmCLQE1dm0ATf0jBc/+Z2C42gp2j+w8YQ5/OznVyenq6+EhCCIw3CXNytKAX1iijWpNGYRR69a9aMGxrKFl0as/m/9+m0DC/aQCPbVWF5BmLlfyjo7pKvDdqOBpB5atonqXE8axe1sqI7rTJ610yA7DQQ9dzrp8x4tOn3+yKYpCwkZHLEU5vw1K2naL0kdt7zndIFX6/DoOBIjbNRYNR4b0eNi7mBFIsDvlp8gi/PlEsO47WQvqm3HsyqPCU52T2fqrU3UbTnwENo/t1cMI0O37bSkOTiAPCzXUaG3DEuOzqrIG1j/BDb2JUcgb+dYkHQcmZMSJ0WTwVM5GR4GgB0iQs3BITDIlVMMVrB8h4epcZI5NfV1XyEIJEiuF6cFjEE2isLry6N0NMy3a50yd+b4g5YPSB4wsnMtxdu9XKYQPyz1Q6UzruMZuRy6sii5hkCF2G5pfcE+BvS61xV35cRQ9r/KhuzJ0eNmAyoZZCA=
 after_deploy:
 - scripts/run_application.sh
