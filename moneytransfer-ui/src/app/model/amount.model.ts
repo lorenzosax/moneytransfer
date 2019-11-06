@@ -1,4 +1,4 @@
 export class Amount {
-  currencyCode: string = 'EUR';
+  currencyCode = 'EUR';
   currency: string;
 }

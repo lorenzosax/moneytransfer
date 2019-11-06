@@ -1,32 +1,32 @@
 <div class="alert" [ngClass]="{
-    'alert-info': _status === 'SUCCESS',
-    'alert-warning': _status === 'WARNING',
-    'alert-danger':_status === 'ERROR'}">
+    'alert-info': smStatus === 'SUCCESS',
+    'alert-warning': smStatus === 'WARNING',
+    'alert-danger':smStatus === 'ERROR'}">
 
-  <div *ngIf="!_isFinal">
-    <div *ngIf="_status === 'SUCCESS'">
+  <div *ngIf="!smIsFinal">
+    <div *ngIf="smStatus === 'SUCCESS'">
       <div class="row">
         <div class="col-sm-12">
-          <p>ID Transazione: <b>{{_transaction.id}}</b></p>
+          <p>ID Transazione: <b>{{smTransaction.id}}</b></p>
         </div>
         <div class="col-sm-12">
-          <p>Importo: <b>{{_data.amount.currency + " " + _data.amount.currencyCode}}</b></p>
+          <p>Importo: <b>{{smData.amount.currency + " " + smData.amount.currencyCode}}</b></p>
         </div>
         <div class="col-sm-12">
-          <p>Commissioni: <b>{{_data.commissions.amount + " " + _data.commissions.currencyCode}}</b></p>
+          <p>Commissioni: <b>{{smData.commissions.amount + " " + smData.commissions.currencyCode}}</b></p>
         </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="_isFinal">
+  <div *ngIf="smIsFinal">
     <div class="row">
       <div class="col-sm-12">
-        <p>CRO: <b>{{_data.cro}}</b></p>
+        <p>CRO: <b>{{smData.cro}}</b></p>
       </div>
       <div class="col-sm-12">
-        <div *ngIf="_messages.length > 0">
-          <div *ngFor="let msg of _messages">
+        <div *ngIf="smMessages.length > 0">
+          <div *ngFor="let msg of smMessages">
             <p>{{msg}}</p>
           </div>
         </div>
@@ -34,12 +34,12 @@
     </div>
   </div>
 
-  <div *ngIf="_status !== 'SUCCESS'">
+  <div *ngIf="smStatus !== 'SUCCESS'">
     <h5>
-      {{_status === 'ERROR' ? 'Errore' : 'Attenzione'}}
+      {{smStatus === 'ERROR' ? 'Errore' : 'Attenzione'}}
     </h5>
-    <div *ngIf="_messages.length > 0">
-      <div *ngFor="let msg of _messages">
+    <div *ngIf="smMessages.length > 0">
+      <div *ngFor="let msg of smMessages">
         <p>{{msg}}</p>
       </div>
     </div>

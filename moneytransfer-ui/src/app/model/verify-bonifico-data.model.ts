@@ -1,4 +1,4 @@
-import {Amount} from "./amount.model";
+import {Amount} from './amount.model';
 
 export class VerifyBonificoData {
   amount: Amount = new Amount();

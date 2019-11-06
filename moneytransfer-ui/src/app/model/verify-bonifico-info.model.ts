@@ -1,5 +1,5 @@
-import {Amount} from "./amount.model";
-import {Commissions} from "./commissions.model";
+import {Amount} from './amount.model';
+import {Commissions} from './commissions.model';
 
 export class VerifyBonificoInfo {
   commissions: Commissions;

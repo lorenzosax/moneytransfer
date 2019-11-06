@@ -4,14 +4,14 @@ import {BonificoService} from '../../services/bonifico.service';
 import {PrepareBonificoInfo} from '../../model/prepare-bonifico-info.model';
 import {NgbDateCustomParserFormatter} from '../../utils/filter/dateformat';
 import {BonificoFormModel} from '../../model/form/bonifico-form.model';
-import {Constant} from "../../utils/constant";
-import {VerifyBonificoRequest} from "../../model/request/verify-bonifico-request.model";
-import {Utils} from "../../utils/utils";
-import {Amount} from "../../model/amount.model";
-import {VerifyBonificoResponse} from "../../model/response/verify-bonifico-response.model";
-import {PrepareBonificoResponse} from "../../model/response/prepare-bonifico-response.model";
-import {ExecuteBonificoResponse} from "../../model/response/execute-bonifico-response.model";
-import {Router} from "@angular/router";
+import {Constant} from '../../utils/constant';
+import {VerifyBonificoRequest} from '../../model/request/verify-bonifico-request.model';
+import {Utils} from '../../utils/utils';
+import {Amount} from '../../model/amount.model';
+import {VerifyBonificoResponse} from '../../model/response/verify-bonifico-response.model';
+import {PrepareBonificoResponse} from '../../model/response/prepare-bonifico-response.model';
+import {ExecuteBonificoResponse} from '../../model/response/execute-bonifico-response.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-bonifico-page',
@@ -28,11 +28,11 @@ export class BonificoPageComponent implements OnInit {
     private router: Router
   ) {}
 
-  submitted: boolean = false;
-  loading: boolean = false;
-  isLastOperation: boolean = false;
-  verifyButtonShowed: boolean = true;
-  isFinalState: boolean = false;
+  submitted = false;
+  loading = false;
+  isLastOperation = false;
+  verifyButtonShowed = true;
+  isFinalState = false;
 
   baseInfo: PrepareBonificoInfo;
 
@@ -72,14 +72,14 @@ export class BonificoPageComponent implements OnInit {
       if (res.result.outcome === 'SUCCESS') {
         this.baseInfo = res.data;
         this.form.executionDate = Utils.dateStringToNgbDate(this.baseInfo.todayDate);
-        this.setAvailableDateForExecutionDate(this.baseInfo.todayDate, this.baseInfo.transferLimitDate)
+        this.setAvailableDateForExecutionDate(this.baseInfo.todayDate, this.baseInfo.transferLimitDate);
       }
     });
   }
 
   verifyBonifico() {
     this.loading = true;
-    let request: VerifyBonificoRequest = new VerifyBonificoRequest();
+    const request: VerifyBonificoRequest = new VerifyBonificoRequest();
     request.data.executionDate = Utils.ngbDateToString(this.form.executionDate);
     request.data.paymentReason = this.form.paymentReason;
     request.data.beneficiaryIban = this.form.beneficiaryIban;

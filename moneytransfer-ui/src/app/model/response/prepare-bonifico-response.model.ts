@@ -1,7 +1,7 @@
-import {BaseResponse} from "./base-response.model";
-import {PrepareBonificoInfo} from "../prepare-bonifico-info.model";
+import {BaseResponse} from './base-response.model';
+import {PrepareBonificoInfo} from '../prepare-bonifico-info.model';
 
-export class PrepareBonificoResponse extends BaseResponse{
+export class PrepareBonificoResponse extends BaseResponse {
 
-  data: PrepareBonificoInfo
+  data: PrepareBonificoInfo;
 }

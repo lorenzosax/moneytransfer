@@ -1,6 +1,6 @@
 plugins {
   id 'java'
-  id "com.moowork.node" version "1.2.0"
+  id 'com.moowork.node' version '1.2.0'
 }
 
 node {
@@ -9,7 +9,7 @@ node {
   download = true
 }
 
-jar.dependsOn 'npm_run_build'
+jar.dependsOn 'npm_run_buildProd'
 
 jar {
   from 'dist/moneytransfer-ui' into 'static'

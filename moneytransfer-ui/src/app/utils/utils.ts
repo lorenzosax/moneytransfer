@@ -7,15 +7,15 @@ export class  Utils {
     return date ? `${isNumber(date.day) ? padNumber(date.day) : ''}/${isNumber(date.month) ? padNumber(date.month) : ''}/${date.year}` : '';
   }
 
-  public static dateStringToNgbDate(date: String) {
-    const d: String[] = date.split('/');
+  public static dateStringToNgbDate(date: string) {
+    const d: string[] = date.split('/');
     return new NgbDate(Number(d[2]), Number(d[1]), Number(d[0]));
   }
 
   public static buildEndpoint(endpoint: string, pathParam: object): string {
     let regex: RegExp;
-    for (let key in pathParam) {
-      regex = new RegExp(':'+key);
+    for (const key in pathParam) {
+      regex = new RegExp(':' + key);
       endpoint = endpoint.replace(regex, pathParam[key]);
     }
     return endpoint;

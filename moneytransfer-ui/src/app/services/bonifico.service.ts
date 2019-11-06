@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Constant} from '../utils/constant';
-import {PrepareBonificoResponse} from "../model/response/prepare-bonifico-response.model";
-import {Observable} from "rxjs/internal/Observable";
+import {PrepareBonificoResponse} from '../model/response/prepare-bonifico-response.model';
+import {Observable} from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import {VerifyBonificoRequest} from "../model/request/verify-bonifico-request.model";
-import {VerifyBonificoResponse} from "../model/response/verify-bonifico-response.model";
-import {Utils} from "../utils/utils";
-import {ExecuteBonificoResponse} from "../model/response/execute-bonifico-response.model";
+import {VerifyBonificoRequest} from '../model/request/verify-bonifico-request.model';
+import {VerifyBonificoResponse} from '../model/response/verify-bonifico-response.model';
+import {Utils} from '../utils/utils';
+import {ExecuteBonificoResponse} from '../model/response/execute-bonifico-response.model';
 
 @Injectable({
   providedIn: 'root'

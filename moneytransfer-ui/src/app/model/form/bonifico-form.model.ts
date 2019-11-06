@@ -1,4 +1,4 @@
-import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
 export class BonificoFormModel {
   amount: string;

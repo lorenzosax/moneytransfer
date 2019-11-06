@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {VerifyBonificoInfo} from "../../../model/verify-bonifico-info.model";
-import {Transaction} from "../../../model/transaction.model";
-import {ExecuteBonificoInfo} from "../../../model/execute-bonifico-info.model";
+import {VerifyBonificoInfo} from '../../../model/verify-bonifico-info.model';
+import {Transaction} from '../../../model/transaction.model';
+import {ExecuteBonificoInfo} from '../../../model/execute-bonifico-info.model';
 
 @Component({
   selector: 'app-summary-bonifico',
@@ -12,37 +12,37 @@ export class SummaryBonificoComponent implements OnInit {
 
   constructor() { }
 
-  _data: VerifyBonificoInfo | ExecuteBonificoInfo;
-  _transaction: Transaction;
-  _status: string;
-  _messages: string[];
-  _isFinal: boolean;
+  smData: VerifyBonificoInfo | ExecuteBonificoInfo;
+  smTransaction: Transaction;
+  smStatus: string;
+  smMessages: string[];
+  smIsFinal: boolean;
 
   ngOnInit() {
   }
 
   @Input()
   set data(d: VerifyBonificoInfo | ExecuteBonificoInfo) {
-    this._data = d;
+    this.smData = d;
   }
 
   @Input()
   set transaction(t: Transaction) {
-    this._transaction = t;
+    this.smTransaction = t;
   }
 
   @Input()
   set status(s: string) {
-    this._status = s;
+    this.smStatus = s;
   }
 
   @Input()
   set messages(m: string[]) {
-    this._messages = m;
+    this.smMessages = m;
   }
 
   @Input()
   set isFinal(isFinal: boolean) {
-    this._isFinal = isFinal;
+    this.smIsFinal = isFinal;
   }
 }
