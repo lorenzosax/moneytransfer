@@ -21,6 +21,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.bank.moneytransfer</groupId>
+            <artifactId>moneytransfer-ui</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- Exclude Spring Boot's Default Logging -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -45,11 +51,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

@@ -28,7 +28,7 @@ build/
 node_modules/
 HELP.md
 out-tsc/
-src/main/resources/static
+moneytransfer-api/src/main/resources/static
 
 # Compiled source #
 ###################

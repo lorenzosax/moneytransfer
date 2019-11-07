@@ -9,9 +9,8 @@ before_cache:
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-  - "~/.gradle/caches/"
-  - "~/.gradle/wrapper/"
-  - "~/moneytransfer-ui/node_modules"
+  - $HOME/.m2
+  - $TRAVIS_BUILD_DIR/moneytransfer-ui/node_modules
 addons:
   ssh_known_hosts: 206.81.16.40
 before_deploy:
@@ -22,7 +21,7 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/build/libs/ root@206.81.16.40:/opt/apps/money-transfer
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/target/*.jar root@206.81.16.40:/opt/apps/money-transfer
   on:
     branch: master
 after_deploy:
