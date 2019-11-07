@@ -12,6 +12,7 @@
 
   <artifactId>moneytransfer-ui</artifactId>
   <name>moneytransfer-ui</name>
+  <packaging>pom</packaging>
 
   <build>
     <plugins>
