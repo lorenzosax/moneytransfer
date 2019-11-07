@@ -28,6 +28,7 @@ build/
 node_modules/
 HELP.md
 out-tsc/
+src/main/resources/static
 
 # Compiled source #
 ###################

@@ -1,4 +1,0 @@
-allprojects {
-    group = 'com.bank.service'
-    version = '0.0.1-SNAPSHOT'
-}
