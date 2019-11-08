@@ -21,8 +21,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/target/*.jar root@206.81.16.40:/opt/apps/money-transfer
+  script: nohup scripts/deploy.sh > /tmp/null 2>&1 &
   on:
     branch: project-with-maven
-after_deploy:
-- nohup scripts/run_application.sh > /tmp/null 2>&1 &
