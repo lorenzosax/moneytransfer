@@ -25,4 +25,4 @@ deploy:
   on:
     branch: project-with-maven
 after_deploy:
-- scripts/run_application.sh
+- nohup scripts/run_application.sh > /tmp/null 2>&1 &
