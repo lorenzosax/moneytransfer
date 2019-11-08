@@ -21,6 +21,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: nohup scripts/deploy.sh > /tmp/null 2>&1 &
+  script: nohup scripts/deploy.sh $TRAVIS_BUILD_DIR > /tmp/null 2>&1 &
   on:
     branch: project-with-maven
