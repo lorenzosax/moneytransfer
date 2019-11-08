@@ -8,6 +8,9 @@ cache:
   directories:
   - $HOME/.m2
   - $TRAVIS_BUILD_DIR/moneytransfer-ui/node_modules
+install: true
+script:
+  - ./mvnw install -B
 addons:
   ssh_known_hosts: 206.81.16.40
 before_deploy:

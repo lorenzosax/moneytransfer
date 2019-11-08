@@ -8,8 +8,9 @@ cache:
   directories:
   - $HOME/.m2
   - $TRAVIS_BUILD_DIR/moneytransfer-ui/node_modules
+install: true
 script:
-  - ./mvnw clean install -B
+  - ./mvnw install -B
 deploy:
   provider: heroku
   app: moneytransfer-it
