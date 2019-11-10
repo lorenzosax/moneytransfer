@@ -10,7 +10,7 @@ matrix:
       deploy:
         - provider: script
           skip_cleanup: true
-          script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist root@206.81.16.40:/var/www/html/moneytransfer/public
+          script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist/* root@206.81.16.40:/var/www/html/moneytransfer/public
           on:
             branch: split-ui-api-from-project-with-maven
 
