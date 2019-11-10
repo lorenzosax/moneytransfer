@@ -20,6 +20,5 @@
 
     <modules>
         <module>moneytransfer-api</module>
-        <module>moneytransfer-ui</module>
     </modules>
 </project>

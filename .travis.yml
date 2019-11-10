@@ -11,6 +11,10 @@ cache:
 install: true
 script:
   - ./mvnw install -B
+  - cd moneytransfer-ui
+  - npm install
+  - npm run build
+  - cd ..
 addons:
   ssh_known_hosts: 206.81.16.40
 before_deploy:
