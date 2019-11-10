@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseServerHost: 'https://app.lorenzogagliani.it'
+  baseServerHost: 'https://app.lorenzogagliani.it/moneytransfer'
 };
