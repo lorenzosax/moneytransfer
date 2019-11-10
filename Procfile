@@ -1,1 +1,0 @@
-web java -Dserver.port=80 -Dspring.profiles.active=prod $JAVA_OPTS -jar target/*.jar
