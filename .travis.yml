@@ -1,27 +1,36 @@
-language: java
-jdk: openjdk8
+matrix:
+  include:
+    - language: node_js
+      node_js: 10.9.0
+      before_script:
+        - cd moneytransfer-ui
+        - npm install
+      script:
+        - npm run build
+
+    - language: java
+      jdk: openjdk8
+      script:
+        - ./mvnw install -B
+
+cache:
+  directories:
+  - $HOME/.m2
+
 notifications:
   email:
     on_success: always
     on_failure: always
-cache:
-  directories:
-  - $HOME/.m2
-  - $TRAVIS_BUILD_DIR/moneytransfer-ui/node_modules
-install: true
-script:
-  - ./mvnw install -B
-  - cd moneytransfer-ui
-  - npm install
-  - npm run build
-  - cd ..
+
 addons:
   ssh_known_hosts: 206.81.16.40
+
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_6d54636b4ab4_key -iv $encrypted_6d54636b4ab4_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/deploy_rsa
 - ssh-add /tmp/deploy_rsa
+
 deploy:
   - provider: script
     skip_cleanup: true
@@ -33,5 +42,6 @@ deploy:
     script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist root@206.81.16.40:/var/www/html/moneytransfer/public
     on:
       branch: project-with-maven
+
 after_deploy:
 - nohup scripts/run.sh > /tmp/null 2>&1 &
