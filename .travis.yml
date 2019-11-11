@@ -16,6 +16,7 @@ matrix:
 
     - language: java
       jdk: openjdk8
+      install: true
       script:
         - ./mvnw install -B
       deploy:
