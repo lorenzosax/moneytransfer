@@ -10,7 +10,7 @@ matrix:
       deploy:
         - provider: script
           skip_cleanup: true
-          script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist/* root@206.81.16.40:/var/www/html/moneytransfer/public
+          script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist/* root@206.81.16.40:/var/www/html/moneytransfer/public
           on:
             branch: project-with-maven
 
@@ -21,7 +21,7 @@ matrix:
       deploy:
         - provider: script
           skip_cleanup: true
-          script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/target/*.jar root@206.81.16.40:/opt/apps/money-transfer
+          script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/target/*.jar root@206.81.16.40:/opt/apps/money-transfer
           on:
             branch: project-with-maven
       after_deploy:
