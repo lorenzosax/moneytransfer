@@ -22,7 +22,7 @@ matrix:
       deploy:
         - provider: script
           skip_cleanup: true
-          script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/target/*.war root@206.81.16.40:/opt/apps/money-transfer
+          script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/build/libs/*.war root@206.81.16.40:/opt/apps/money-transfer
           on:
             branch: project-with-gradle
       after_deploy:
