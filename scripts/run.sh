@@ -5,6 +5,6 @@ ssh root@206.81.16.40 <<EOF
     sleep 10
     cd $CATALINA_HOME/webapps
     rm -R money*
-    cp /opt/apps/money-transfer/*.war .
+    cp /opt/apps/money-transfer/moneytransfer.war .
     sudo systemctl start tomcat
 EOF

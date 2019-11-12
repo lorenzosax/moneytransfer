@@ -12,6 +12,10 @@ repositories {
 	mavenCentral()
 }
 
+bootWar {
+    archiveFileName = 'moneytransfer.war'
+}
+
 dependencies {
     compile             'org.iban4j:iban4j:3.2.1'
 
