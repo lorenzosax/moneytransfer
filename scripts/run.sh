@@ -1,6 +1,10 @@
 #!/bin/bash
 
 ssh root@206.81.16.40 <<EOF
-  cd /opt/apps/money-transfer
-  java -jar -Dspring.profiles.active=prod moneytransfer-*.jar &
+    sudo systemctl stop tomcat
+    sleep 10
+    cd $CATALINA_HOME/webapps
+    rm -R money*
+    cp /opt/apps/money-transfer/*.war .
+    sudo systemctl start tomcat
 EOF

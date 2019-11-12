@@ -12,21 +12,21 @@ matrix:
           skip_cleanup: true
           script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist/ root@206.81.16.40:/var/www/html/moneytransfer/public
           on:
-            branch: project-with-maven
+            branch: project-with-gradle
 
     - language: java
       jdk: openjdk8
       install: true
       script:
-        - ./mvnw install -B
+        - ./gradlew build
       deploy:
         - provider: script
           skip_cleanup: true
-          script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/target/*.jar root@206.81.16.40:/opt/apps/money-transfer
+          script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/target/*.war root@206.81.16.40:/opt/apps/money-transfer
           on:
-            branch: project-with-maven
+            branch: project-with-gradle
       after_deploy:
-        - nohup scripts/run.sh > /tmp/null 2>&1 &
+        - scripts/run.sh
 
 addons:
   ssh_known_hosts: 206.81.16.40
@@ -40,6 +40,8 @@ before_deploy:
 cache:
   directories:
   - $HOME/.m2
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
 
 notifications:
   email:
