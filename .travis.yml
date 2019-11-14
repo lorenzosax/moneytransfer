@@ -26,7 +26,7 @@ matrix:
           on:
             branch: project-with-gradle
       after_deploy:
-        - nohup scripts/run.sh > /tmp/null 2>&1 &
+        - scripts/run.sh
 
 addons:
   ssh_known_hosts: 206.81.16.40
