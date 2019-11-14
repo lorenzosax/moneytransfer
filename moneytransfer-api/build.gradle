@@ -11,6 +11,12 @@ repositories {
 	mavenCentral()
 }
 
+bootJar {
+    // https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-install
+    launchScript()
+    archiveFileName = 'moneytransfer.jar'
+}
+
 dependencies {
     compile             'org.iban4j:iban4j:3.2.1'
 
