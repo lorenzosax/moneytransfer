@@ -8,7 +8,8 @@ import com.bank.service.moneytransfer.model.pojo.CustomerBankAccount;
 
 public interface ITransactionService {
 
-    public Transaction generateTransactionFromVerify(CustomerBankAccount customerBankAccount, BankTransferData bankTransferData);
+    public Transaction generateTransactionFromVerify(CustomerBankAccount customerBankAccount,
+                                                     BankTransferData bankTransferData);
 
     public Transaction updateAndTerminateTransaction(String trxId, Customer customer, BankAccount bankAccount);
 }

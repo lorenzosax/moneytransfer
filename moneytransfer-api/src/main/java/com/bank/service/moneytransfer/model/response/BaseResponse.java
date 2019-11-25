@@ -1,14 +1,14 @@
 package com.bank.service.moneytransfer.model.response;
 
-import com.bank.service.moneytransfer.model.pojo.OutcomeEnum;
-import com.bank.service.moneytransfer.model.pojo.Result;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+
+import com.bank.service.moneytransfer.model.pojo.OutcomeEnum;
+import com.bank.service.moneytransfer.model.pojo.Result;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BaseResponse implements Serializable {
@@ -59,8 +59,8 @@ public class BaseResponse implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseResponse{" +
-                "result=" + result +
-                '}';
+        return "BaseResponse{"
+                + "result=" + result
+                + '}';
     }
 }

@@ -1,9 +1,9 @@
 package com.bank.service.moneytransfer.model.request;
 
-import com.bank.service.moneytransfer.model.pojo.BankTransferData;
-
-import javax.validation.Valid;
 import java.io.Serializable;
+import javax.validation.Valid;
+
+import com.bank.service.moneytransfer.model.pojo.BankTransferData;
 
 public class TransferVerifyRequest implements Serializable {
 

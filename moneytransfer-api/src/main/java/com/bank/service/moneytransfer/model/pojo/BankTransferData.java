@@ -1,10 +1,14 @@
 package com.bank.service.moneytransfer.model.pojo;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BankTransferData implements Serializable {
@@ -13,7 +17,8 @@ public class BankTransferData implements Serializable {
     @Valid
     private Amount amount;
     @NotNull(message = "executionDate cannot be missing or empty")
-    @Pattern(regexp = "^(([0-2]\\d|[3][0-1])/([0]\\d|[1][0-2])/[2][0]\\d{2})$", message = "Date format error: use dd/MM/yyyy")
+    @Pattern(regexp = "^(([0-2]\\d|[3][0-1])/([0]\\d|[1][0-2])/[2][0]\\d{2})$",
+            message = "Date format error: use dd/MM/yyyy")
     private String executionDate;
     @NotBlank(message = "beneficiaryName cannot be missing or empty")
     private String beneficiaryName;

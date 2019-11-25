@@ -4,6 +4,9 @@ import com.bank.service.moneytransfer.model.pojo.Transaction;
 import com.bank.service.moneytransfer.model.pojo.TransferVerifyInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * Test.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransferVerifyResponse extends BaseResponse {
 
@@ -14,11 +17,11 @@ public class TransferVerifyResponse extends BaseResponse {
         super();
     }
 
-    public TransferVerifyResponse(TransferVerifyInfo data, Transaction transaction) {
-        super();
-        this.data = data;
-        this.transaction = transaction;
-    }
+    // public TransferVerifyResponse(TransferVerifyInfo data, Transaction transaction) {
+    //    super();
+    //    this.data = data;
+    //    this.transaction = transaction;
+    // }
 
     public TransferVerifyInfo getData() {
         return data;

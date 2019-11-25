@@ -1,5 +1,8 @@
 package com.bank.service.moneytransfer.service.implementation;
 
+import java.math.BigDecimal;
+import javax.validation.Valid;
+
 import com.bank.service.moneytransfer.controller.CustomerController;
 import com.bank.service.moneytransfer.model.entity.BankAccount;
 import com.bank.service.moneytransfer.model.pojo.BankOperationEnum;
@@ -11,9 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.validation.Valid;
-import java.math.BigDecimal;
 
 @Service
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
@@ -30,7 +30,8 @@ public class BankAccountServiceImpl implements IBankAccountService {
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public BankAccount updateAvailableBalance(@Valid BankAccount bankAccount, BankOperationEnum bankOperation, BigDecimal amountToTransfer) {
+    public BankAccount updateAvailableBalance(@Valid BankAccount bankAccount, BankOperationEnum bankOperation,
+                                              BigDecimal amountToTransfer) {
         BigDecimal oldAvailableBalance = bankAccount.getAvailableBalance();
         switch (bankOperation) {
             case SEND_MONEY:

@@ -1,5 +1,10 @@
 package com.bank.service.moneytransfer.service.implementation;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
+
 import com.bank.service.moneytransfer.controller.CustomerController;
 import com.bank.service.moneytransfer.model.entity.BankAccount;
 import com.bank.service.moneytransfer.model.entity.Customer;
@@ -17,11 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.Optional;
-import java.util.UUID;
-
 @Service
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
 public class TransactionServiceImpl implements ITransactionService {
@@ -33,14 +33,16 @@ public class TransactionServiceImpl implements ITransactionService {
     private IBankAccountService bankAccountService;
 
     @Autowired
-    public TransactionServiceImpl(ITransactionRepository transactionRepository, IBankAccountService bankAccountService) {
+    public TransactionServiceImpl(ITransactionRepository transactionRepository,
+                                  IBankAccountService bankAccountService) {
         this.transactionRepository = transactionRepository;
         this.bankAccountService = bankAccountService;
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Transaction generateTransactionFromVerify(CustomerBankAccount customerBankAccount, BankTransferData bankTransferData) {
+    public Transaction generateTransactionFromVerify(CustomerBankAccount customerBankAccount,
+                                                     BankTransferData bankTransferData) {
         Transaction transaction = new Transaction();
         transaction.setAccreditationDate(bankTransferData.getExecutionDate());
         transaction.setAmount(new BigDecimal(bankTransferData.getAmount().getCurrency()));
@@ -59,7 +61,8 @@ public class TransactionServiceImpl implements ITransactionService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Transaction updateAndTerminateTransaction(String trxId, Customer customer, BankAccount bankAccount) {
         Transaction trx = null;
-        Optional<Transaction> transaction = transactionRepository.findTransactionByTrxIdAndCustomerAndBankAccount(trxId, customer, bankAccount);
+        Optional<Transaction> transaction =
+                transactionRepository.findTransactionByTrxIdAndCustomerAndBankAccount(trxId, customer, bankAccount);
         if (transaction.isPresent()) {
             trx = transaction.get();
             trx.setExecutedAt(new Date());

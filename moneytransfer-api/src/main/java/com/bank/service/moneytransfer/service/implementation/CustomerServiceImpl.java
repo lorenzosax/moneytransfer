@@ -1,10 +1,21 @@
 package com.bank.service.moneytransfer.service.implementation;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 import com.bank.service.moneytransfer.controller.CustomerController;
 import com.bank.service.moneytransfer.model.entity.BankAccount;
 import com.bank.service.moneytransfer.model.entity.Customer;
 import com.bank.service.moneytransfer.model.entity.Transaction;
-import com.bank.service.moneytransfer.model.pojo.*;
+import com.bank.service.moneytransfer.model.pojo.Amount;
+import com.bank.service.moneytransfer.model.pojo.BankTransferData;
+import com.bank.service.moneytransfer.model.pojo.Commissions;
+import com.bank.service.moneytransfer.model.pojo.CustomerBankAccount;
+import com.bank.service.moneytransfer.model.pojo.TransferExecuteInfo;
+import com.bank.service.moneytransfer.model.pojo.TransferPrepareInfo;
+import com.bank.service.moneytransfer.model.pojo.TransferVerifyInfo;
 import com.bank.service.moneytransfer.model.response.TransferExecuteResponse;
 import com.bank.service.moneytransfer.model.response.TransferPrepareResponse;
 import com.bank.service.moneytransfer.model.response.TransferVerifyResponse;
@@ -22,11 +33,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
@@ -51,7 +57,8 @@ public class CustomerServiceImpl implements ICustomerService {
         if (customerBankAccount != null) {
             Date today = new Date();
             TransferPrepareInfo transferPrepareInfo = new TransferPrepareInfo();
-            transferPrepareInfo.setFullName(customerBankAccount.getCustomer().getName() + " " + customerBankAccount.getCustomer().getLastname());
+            transferPrepareInfo.setFullName(customerBankAccount.getCustomer().getName()
+                    + " " + customerBankAccount.getCustomer().getLastname());
             transferPrepareInfo.setAccountNumber(customerBankAccount.getBankAccount().getAccountNumber());
             transferPrepareInfo.setTodayDate(DateUtils.getFormattedDate(today));
             transferPrepareInfo.setTransferLimitDate(DateUtils.addDaysAndGetFormattedDate(new Date(), 30));
@@ -64,7 +71,8 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public TransferVerifyResponse executeTransferVerify(Long customerId, String bankAccountNumber, BankTransferData bankTransferData) {
+    public TransferVerifyResponse executeTransferVerify(Long customerId, String bankAccountNumber,
+                                                        BankTransferData bankTransferData) {
         TransferVerifyResponse transferVerifyResponse = new TransferVerifyResponse();
         CustomerBankAccount customerBankAccount = getCustomerBankAccount(customerId, bankAccountNumber);
         try {
@@ -77,17 +85,22 @@ public class CustomerServiceImpl implements ICustomerService {
                 if (amountToTransfer.compareTo(availableBalance) <= 0
                         && amountToTransfer.compareTo(transferLimit) <= 0
                         && amountToTransfer.compareTo(BigDecimal.ONE) >= 0) {
-                    Transaction transaction = transactionService.generateTransactionFromVerify(customerBankAccount, bankTransferData);
+                    Transaction transaction =
+                            transactionService.generateTransactionFromVerify(customerBankAccount, bankTransferData);
                     TransferVerifyInfo transferVerifyInfo = new TransferVerifyInfo();
-                    transferVerifyInfo.setAmount(new Amount(bankAccount.getCurrencyCode(), amountToTransfer.toString()));
-                    transferVerifyInfo.setCommissions(new Commissions(bankAccount.getCurrencyCode(), bankAccount.getCommissions()));
-                    transferVerifyResponse.setTransaction(new com.bank.service.moneytransfer.model.pojo.Transaction(transaction.getTrxId()));
+                    transferVerifyInfo.setAmount(
+                            new Amount(bankAccount.getCurrencyCode(), amountToTransfer.toString()));
+                    transferVerifyInfo.setCommissions(
+                            new Commissions(bankAccount.getCurrencyCode(), bankAccount.getCommissions()));
+                    transferVerifyResponse.setTransaction(
+                            new com.bank.service.moneytransfer.model.pojo.Transaction(transaction.getTrxId()));
                     transferVerifyResponse.setData(transferVerifyInfo);
                 } else if (amountToTransfer.compareTo(BigDecimal.ONE) < 0) {
                     logger.error("Amount to transfer cannot be less than 1");
                     transferVerifyResponse.setWarningResponse();
-                    transferVerifyResponse.addMessages("L'importo deve essere superiore a 1 " + bankAccount.getCurrencyCode());
-                } else if (amountToTransfer.compareTo(availableBalance) > 0){
+                    transferVerifyResponse.addMessages("L'importo deve essere superiore a 1 "
+                            + bankAccount.getCurrencyCode());
+                } else if (amountToTransfer.compareTo(availableBalance) > 0) {
                     logger.error("Insufficient balance to transfer money: amountToTransfer="
                             + amountToTransfer + " availableBalance=" + availableBalance);
                     transferVerifyResponse.setErrorResponse();
@@ -100,12 +113,13 @@ public class CustomerServiceImpl implements ICustomerService {
                             + transferLimit + " " + bankAccount.getCurrencyCode() + ", contatta il servizio clienti.");
                 }
             } else {
-                logger.info("CustomerBankAccount obj not found for customerId=" + customerId + " bankAccountNumber=" + bankAccountNumber);
+                logger.info("CustomerBankAccount obj not found for customerId="
+                        + customerId + " bankAccountNumber=" + bankAccountNumber);
                 transferVerifyResponse.setErrorResponse();
             }
-        } catch (IbanFormatException |
-                InvalidCheckDigitException |
-                UnsupportedCountryException e) {
+        } catch (IbanFormatException
+                | InvalidCheckDigitException
+                | UnsupportedCountryException e) {
             logger.error("Invalid iban parameter " + bankTransferData.getBeneficiaryIban());
             transferVerifyResponse.setErrorResponse();
             transferVerifyResponse.addMessages("IBAN non valido!");
@@ -118,7 +132,8 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public TransferExecuteResponse executeTransferUltimate(Long customerId, String bankAccountNumber, String transactionId) {
+    public TransferExecuteResponse executeTransferUltimate(Long customerId, String bankAccountNumber,
+                                                           String transactionId) {
         TransferExecuteResponse transferExecuteResponse = new TransferExecuteResponse();
         CustomerBankAccount customerBankAccount = getCustomerBankAccount(customerId, bankAccountNumber);
         if (customerBankAccount != null) {
@@ -146,16 +161,16 @@ public class CustomerServiceImpl implements ICustomerService {
 
     private CustomerBankAccount getCustomerBankAccount(Long customerId, String bankAccountNumber) {
         CustomerBankAccount customerBankAccount = null;
-        Optional<Customer> c = customerRepository.findById(customerId);
+        Optional<Customer> customerOptional = customerRepository.findById(customerId);
         Customer customer;
         BankAccount bankAccount;
-        if (c.isPresent()) {
-            customer = c.get();
+        if (customerOptional.isPresent()) {
+            customer = customerOptional.get();
             bankAccount = getBankAccountByAccountNumberFromList(customer.getBankAccountList(), bankAccountNumber);
             if (bankAccount != null) {
                 customerBankAccount = new CustomerBankAccount(customer, bankAccount);
             } else {
-                logger.error("Bank account with accountNumber=" + bankAccountNumber+ " not found");
+                logger.error("Bank account with accountNumber=" + bankAccountNumber + " not found");
             }
         } else {
             logger.error("Customer with id=" + customerId + " not found");
@@ -163,11 +178,13 @@ public class CustomerServiceImpl implements ICustomerService {
         return customerBankAccount;
     }
 
-    private BankAccount getBankAccountByAccountNumberFromList(List<BankAccount> bankAccountList, String bankAccountNumber) {
+    private BankAccount getBankAccountByAccountNumberFromList(List<BankAccount> bankAccountList,
+                                                              String bankAccountNumber) {
         BankAccount bankAccount = null;
         for (BankAccount b : bankAccountList) {
-            if (b.getAccountNumber().equals(bankAccountNumber))
+            if (b.getAccountNumber().equals(bankAccountNumber)) {
                 bankAccount = b;
+            }
         }
         return bankAccount;
     }

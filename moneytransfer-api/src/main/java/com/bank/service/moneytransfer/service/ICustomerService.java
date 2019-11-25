@@ -9,7 +9,9 @@ public interface ICustomerService {
 
     public TransferPrepareResponse getTransferBasicInformation(Long customerId, String bankAccountNumber);
 
-    public TransferVerifyResponse executeTransferVerify(Long customerId, String bankAccountNumber, BankTransferData bankTransferData);
+    public TransferVerifyResponse executeTransferVerify(Long customerId, String bankAccountNumber,
+                                                        BankTransferData bankTransferData);
 
-    public TransferExecuteResponse executeTransferUltimate(Long customerId, String bankAccountNumber, String transactionId);
+    public TransferExecuteResponse executeTransferUltimate(Long customerId, String bankAccountNumber,
+                                                           String transactionId);
 }

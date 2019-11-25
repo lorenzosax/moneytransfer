@@ -27,8 +27,8 @@ public class TransferPrepareResponse extends BaseResponse {
 
     @Override
     public String toString() {
-        return "TransferPrepareResponse{" +
-                "data=" + data +
-                '}';
+        return "TransferPrepareResponse{"
+                + "data=" + data
+                + '}';
     }
 }

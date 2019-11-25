@@ -1,5 +1,14 @@
 package com.bank.service.moneytransfer.filter;
 
+import java.io.IOException;
+import java.util.UUID;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
 import com.bank.service.moneytransfer.controller.CustomerController;
 import com.bank.service.moneytransfer.utils.Constant;
 import org.apache.catalina.connector.RequestFacade;
@@ -8,9 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.*;
-import java.io.IOException;
-import java.util.UUID;
 
 @Component
 public class RequestFilter implements Filter {
@@ -18,7 +24,8 @@ public class RequestFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterchain)
@@ -30,5 +37,6 @@ public class RequestFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterconfig) throws ServletException {}
+    public void init(FilterConfig filterconfig) throws ServletException {
+    }
 }

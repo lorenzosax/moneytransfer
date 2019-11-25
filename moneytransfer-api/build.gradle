@@ -3,6 +3,11 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 	id 'idea'
+    id 'checkstyle'
+}
+
+ext {
+    checkstyleVersion = '6.16.1'
 }
 
 sourceCompatibility = '1.8'
@@ -15,6 +20,11 @@ bootJar {
     // https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-install
     launchScript()
     archiveFileName = 'moneytransfer.jar'
+}
+
+checkstyle {
+    toolVersion = checkstyleVersion
+    config = rootProject.resources.text.fromFile('config/checkstyle/checkstyle4j.xml')
 }
 
 dependencies {

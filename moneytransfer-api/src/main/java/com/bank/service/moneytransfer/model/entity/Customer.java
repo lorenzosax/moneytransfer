@@ -1,14 +1,21 @@
 package com.bank.service.moneytransfer.model.entity;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -57,10 +64,10 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                '}';
+        return "Customer{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", lastname='" + lastname + '\''
+                + '}';
     }
 }
