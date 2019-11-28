@@ -25,7 +25,7 @@
         <p>CRO: <b>{{smData.cro}}</b></p>
       </div>
       <div class="col-sm-12">
-        <div *ngIf="smMessages.length > 0">
+        <div *ngIf="smMessages && smMessages.length > 0">
           <div *ngFor="let msg of smMessages">
             <p>{{msg}}</p>
           </div>
@@ -38,7 +38,7 @@
     <h5>
       {{smStatus === 'ERROR' ? 'Errore' : 'Attenzione'}}
     </h5>
-    <div *ngIf="smMessages.length > 0">
+    <div *ngIf="smMessages && smMessages.length > 0">
       <div *ngFor="let msg of smMessages">
         <p>{{msg}}</p>
       </div>

@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { BonificoPageComponent } from './pages/bonifico-page/bonifico-page.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
-import {NgbDateToStringFormatPipe} from './utils/pipe/ngb-date-to-string-format.pipe';
+import { NgbDateToStringFormatPipe } from './utils/pipe/ngb-date-to-string-format.pipe';
 import { SummaryBonificoComponent } from './pages/bonifico-page/summary-bonifico/summary-bonifico.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 

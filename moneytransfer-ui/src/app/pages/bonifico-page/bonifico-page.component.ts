@@ -11,7 +11,6 @@ import {Amount} from '../../model/amount.model';
 import {VerifyBonificoResponse} from '../../model/response/verify-bonifico-response.model';
 import {PrepareBonificoResponse} from '../../model/response/prepare-bonifico-response.model';
 import {ExecuteBonificoResponse} from '../../model/response/execute-bonifico-response.model';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-bonifico-page',
@@ -24,8 +23,7 @@ import {Router} from '@angular/router';
 export class BonificoPageComponent implements OnInit {
 
   constructor(
-    private bonificoService: BonificoService,
-    private router: Router
+    private bonificoService: BonificoService
   ) {}
 
   submitted = false;

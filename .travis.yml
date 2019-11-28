@@ -6,13 +6,15 @@ matrix:
         - cd moneytransfer-ui
         - npm install
       script:
+        - npm run lint
+        - npm run test
         - npm run build
       deploy:
         - provider: script
           skip_cleanup: true
           script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist/ root@206.81.16.40:/var/www/html/moneytransfer/public
           on:
-            branch: master
+            branch: fix-frontend-testing
 
     - language: java
       jdk: openjdk8
@@ -24,7 +26,7 @@ matrix:
           skip_cleanup: true
           script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/build/libs/ root@206.81.16.40:/opt/apps/money-transfer
           on:
-            branch: master
+            branch: fix-frontend-testing
       after_deploy:
         - scripts/run.sh
 

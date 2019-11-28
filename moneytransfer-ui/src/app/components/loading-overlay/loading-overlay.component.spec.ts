@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoadingOverlayComponent } from './loading-overlay.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 describe('LoadingOverlayComponent', () => {
   let component: LoadingOverlayComponent;
@@ -8,7 +9,12 @@ describe('LoadingOverlayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoadingOverlayComponent ]
+      imports: [
+        NgxSpinnerModule
+      ],
+      declarations: [
+        LoadingOverlayComponent
+      ]
     })
     .compileComponents();
   }));
