@@ -84,19 +84,19 @@ public class Transaction {
     }
 
     public Date getCreatedAt() {
-        return createdAt;
+        return createdAt != null ? new Date(createdAt.getTime()) : null;
     }
 
     public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+        this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
     }
 
     public Date getExecutedAt() {
-        return executedAt;
+        return executedAt != null ? new Date(createdAt.getTime()) : null;
     }
 
     public void setExecutedAt(Date executedAt) {
-        this.executedAt = executedAt;
+        this.executedAt = executedAt != null ? new Date(executedAt.getTime()) : null;
     }
 
     public BigDecimal getAmount() {

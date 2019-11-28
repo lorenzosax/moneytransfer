@@ -4,10 +4,15 @@ plugins {
 	id 'java'
 	id 'idea'
     id 'checkstyle'
+    id 'findbugs'
 }
 
 ext {
+    iban4jVersion = '3.2.1'
+    h2Version = '1.4.197'
+    mysqlConnectorVersion = '8.0.18'
     checkstyleVersion = '6.16.1'
+    findbugsVersion = '3.0.1'
 }
 
 sourceCompatibility = '1.8'
@@ -24,14 +29,33 @@ bootJar {
 
 checkstyle {
     toolVersion = checkstyleVersion
-    config = rootProject.resources.text.fromFile('config/checkstyle/checkstyle4j.xml')
+    config = rootProject.resources.text.fromFile('config/checkstyle.xml')
+}
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+findbugs {
+    ignoreFailures = false
+    toolVersion = findbugsVersion
+    includeFilter = file("$rootProject.projectDir/config/findbugsIncludeFilter.xml")
+    effort = 'max'
+}
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
 }
 
 dependencies {
-    compile             'org.iban4j:iban4j:3.2.1'
+    compile             group: 'org.iban4j', name: 'iban4j', version: iban4jVersion
 
-    testCompile         group: 'com.h2database', name: 'h2', version: '1.4.197'
-    runtimeOnly         'mysql:mysql-connector-java:8.0.18'
+    testCompile         group: 'com.h2database', name: 'h2', version: h2Version
+    runtimeOnly         group: 'mysql', name: 'mysql-connector-java', version: mysqlConnectorVersion
 
     implementation      'org.springframework.boot:spring-boot-starter-web'
     implementation      'org.springframework.boot:spring-boot-starter-log4j2'

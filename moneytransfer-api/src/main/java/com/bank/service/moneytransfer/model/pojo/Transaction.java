@@ -1,6 +1,8 @@
 package com.bank.service.moneytransfer.model.pojo;
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable {
 
     private String id;
 
