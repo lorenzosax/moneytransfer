@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 	id 'idea'
+    id 'jacoco'
     id 'checkstyle'
     id 'findbugs'
 }
@@ -26,6 +27,18 @@ bootJar {
     launchScript()
     archiveFileName = 'moneytransfer.jar'
 }
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+}
+test.finalizedBy(jacocoTestReport)
 
 checkstyle {
     toolVersion = checkstyleVersion
