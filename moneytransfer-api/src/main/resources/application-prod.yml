@@ -3,10 +3,7 @@ management:
         web:
             base-path: /manage
             exposure:
-                include: health,shutdown
-    endpoint:
-            shutdown:
-                enabled: true
+                include: health
 spring:
     datasource:
         hikari:

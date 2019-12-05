@@ -6,5 +6,5 @@ spring:
         password: sa
     jpa:
         hibernate:
-            ddl-auto: create-drop
+            ddl-auto: create
         open-in-view: false
