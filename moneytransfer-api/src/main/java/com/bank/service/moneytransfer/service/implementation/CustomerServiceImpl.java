@@ -155,7 +155,8 @@ public class CustomerServiceImpl implements ICustomerService {
         return transferExecuteResponse;
     }
 
-    private CustomerBankAccount getCustomerBankAccount(Long customerId, String bankAccountNumber) {
+    @Override
+    public CustomerBankAccount getCustomerBankAccount(Long customerId, String bankAccountNumber) {
         CustomerBankAccount customerBankAccount = null;
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
         Customer customer;

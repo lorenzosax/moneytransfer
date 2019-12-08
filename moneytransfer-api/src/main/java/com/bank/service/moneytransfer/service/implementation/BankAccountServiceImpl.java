@@ -38,12 +38,9 @@ public class BankAccountServiceImpl implements IBankAccountService {
                 bankAccount.setAvailableBalance(oldAvailableBalance.subtract(amountToTransfer));
                 logger.info("SEND_MONEY: Update available balance, subtract " + amountToTransfer);
                 break;
-            case RECEIVE_MONEY:
+            default: // RECEIVE_MONEY
                 bankAccount.setAvailableBalance(oldAvailableBalance.add(amountToTransfer));
                 logger.info("RECEIVE_MONEY: Update available balance, add " + amountToTransfer);
-                break;
-            default:
-                logger.error("bankOperation not Allowed");
         }
         return bankAccountRepository.save(bankAccount);
     }
