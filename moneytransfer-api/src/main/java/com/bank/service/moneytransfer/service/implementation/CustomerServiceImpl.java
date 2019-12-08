@@ -123,10 +123,6 @@ public class CustomerServiceImpl implements ICustomerService {
             logger.error("Invalid iban parameter " + bankTransferData.getBeneficiaryIban());
             transferVerifyResponse.setErrorResponse();
             transferVerifyResponse.addMessages("IBAN non valido!");
-        } catch (Exception e) {
-            logger.error("Generic Error:", e);
-            transferVerifyResponse.setErrorResponse();
-            transferVerifyResponse.addMessages("Servizio momentaneamente non disponibile, riprovare più tardi.");
         }
         return transferVerifyResponse;
     }

@@ -63,7 +63,7 @@ public class TransactionServiceImpl implements ITransactionService {
         Transaction trx = null;
         Optional<Transaction> transaction =
                 transactionRepository.findTransactionByTrxIdAndCustomerAndBankAccount(trxId, customer, bankAccount);
-        if (transaction.isPresent()) {
+        if (transaction.isPresent() && transaction.get().getCro() == null) {
             trx = transaction.get();
             trx.setExecutedAt(new Date());
             trx.setCro(UUID.randomUUID().toString().replace("-", ""));

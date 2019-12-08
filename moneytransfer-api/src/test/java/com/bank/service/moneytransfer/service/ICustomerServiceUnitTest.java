@@ -34,7 +34,7 @@ public class ICustomerServiceUnitTest {
     private static String transferLimitDate;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         customerId = 123L;
         customerId2 = 222L;
         bankAccountNumber = "0001234566";
@@ -44,12 +44,12 @@ public class ICustomerServiceUnitTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test
@@ -157,12 +157,12 @@ public class ICustomerServiceUnitTest {
         Assert.assertEquals("Should be success response", OutcomeEnum.SUCCESS,
                 transferExecuteResponse.getResult().getOutcome());
 
-        // Second test (Black box) --> with this test I found issue #2
-        //TransferExecuteResponse transferExecuteResponse2 =
-        //        customerService.executeTransferUltimate(customerId, bankAccountNumber, transactionId);
-        //Assert.assertEquals("Should be an error response", OutcomeEnum.ERROR,
-        //        transferExecuteResponse2.getResult().getOutcome());
-        //Assert.assertNull("Data should be null", transferExecuteResponse2.getData());
+        // Second test (Black box) --> with this test I found and fixed issue #2
+        TransferExecuteResponse transferExecuteResponse2 =
+                customerService.executeTransferUltimate(customerId, bankAccountNumber, transactionId);
+        Assert.assertEquals("Should be an error response", OutcomeEnum.ERROR,
+                transferExecuteResponse2.getResult().getOutcome());
+        Assert.assertNull("Data should be null", transferExecuteResponse2.getData());
 
         // Third test (White box)
         TransferExecuteResponse transferExecuteResponse3 =
