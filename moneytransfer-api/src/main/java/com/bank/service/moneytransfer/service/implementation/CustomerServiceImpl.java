@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static com.bank.service.moneytransfer.utils.Constant.MAX_TRANSFER_LIMIT_DAYS;
+import static com.bank.service.moneytransfer.utils.DateUtils.addDaysToDate;
+import static com.bank.service.moneytransfer.utils.DateUtils.getDateFromFormattedDate;
+
 import com.bank.service.moneytransfer.controller.CustomerController;
 import com.bank.service.moneytransfer.model.entity.BankAccount;
 import com.bank.service.moneytransfer.model.entity.Customer;
@@ -61,7 +65,8 @@ public class CustomerServiceImpl implements ICustomerService {
                     + " " + customerBankAccount.getCustomer().getLastname());
             transferPrepareInfo.setAccountNumber(customerBankAccount.getBankAccount().getAccountNumber());
             transferPrepareInfo.setTodayDate(DateUtils.getFormattedDate(today));
-            transferPrepareInfo.setTransferLimitDate(DateUtils.addDaysAndGetFormattedDate(new Date(), 30));
+            transferPrepareInfo.setTransferLimitDate(
+                    DateUtils.addDaysAndGetFormattedDate(new Date(), MAX_TRANSFER_LIMIT_DAYS));
             transferPrepareResponse.setData(transferPrepareInfo);
         } else {
             transferPrepareResponse.setErrorResponse();
@@ -76,7 +81,7 @@ public class CustomerServiceImpl implements ICustomerService {
         TransferVerifyResponse transferVerifyResponse = new TransferVerifyResponse();
         CustomerBankAccount customerBankAccount = getCustomerBankAccount(customerId, bankAccountNumber);
         try {
-            if (customerBankAccount != null) {
+            if (customerBankAccount != null && isValidExecutionDate(bankTransferData.getExecutionDate())) {
                 BankAccount bankAccount = customerBankAccount.getBankAccount();
                 BigDecimal amountToTransfer = new BigDecimal(bankTransferData.getAmount().getCurrency());
                 BigDecimal availableBalance = bankAccount.getAvailableBalance();
@@ -114,7 +119,8 @@ public class CustomerServiceImpl implements ICustomerService {
                 }
             } else {
                 logger.info("CustomerBankAccount obj not found for customerId="
-                        + customerId + " bankAccountNumber=" + bankAccountNumber);
+                        + customerId + " bankAccountNumber=" + bankAccountNumber
+                        + " or executionDate is invalid");
                 transferVerifyResponse.setErrorResponse();
             }
         } catch (IbanFormatException
@@ -184,5 +190,11 @@ public class CustomerServiceImpl implements ICustomerService {
             }
         }
         return bankAccount;
+    }
+
+    private boolean isValidExecutionDate(String stringExecutionDate) {
+        Date limitDate = addDaysToDate(new Date(), MAX_TRANSFER_LIMIT_DAYS);
+        Date executionDate = getDateFromFormattedDate(stringExecutionDate, null);
+        return executionDate.before(limitDate);
     }
 }

@@ -10,9 +10,7 @@ import com.bank.service.moneytransfer.model.response.TransferExecuteResponse;
 import com.bank.service.moneytransfer.model.response.TransferPrepareResponse;
 import com.bank.service.moneytransfer.model.response.TransferVerifyResponse;
 import com.bank.service.moneytransfer.utils.DateUtils;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,15 +39,6 @@ public class CustomerServiceUnitTest {
         bankAccountNumber2 = "0001234577";
         todayDate = DateUtils.getFormattedDate(new Date());
         transferLimitDate = DateUtils.addDaysAndGetFormattedDate(new Date(), 30);
-    }
-
-    @Before
-    public void setUp() {
-
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test
@@ -141,6 +130,14 @@ public class CustomerServiceUnitTest {
         Assert.assertEquals("Should be fail because fake account number",
                 OutcomeEnum.ERROR,
                 transferVerifyResponse6.getResult().getOutcome());
+
+        // Seventh test (Black box)
+        setBankTransferDataOk(bankTransferData, 31);
+        TransferVerifyResponse transferVerifyResponse7 =
+                customerService.executeTransferVerify(customerId2, bankAccountNumber2, bankTransferData);
+        Assert.assertEquals("Should be fail because execution date is invalid",
+                OutcomeEnum.ERROR,
+                transferVerifyResponse7.getResult().getOutcome());
     }
 
     @Test
@@ -171,11 +168,15 @@ public class CustomerServiceUnitTest {
                 transferExecuteResponse3.getResult().getOutcome());
     }
 
-    private void setBankTransferDataOk(BankTransferData bankTransferData) {
+    private void setBankTransferDataOk(BankTransferData bankTransferData, int executionDateDaysFromNow) {
         bankTransferData.setBeneficiaryName("Mario Rossi");
         bankTransferData.setBeneficiaryIban("IT44Q0300203280779186981788");
         bankTransferData.setAmount(new Amount("EUR", "123.50"));
-        bankTransferData.setExecutionDate(DateUtils.addDaysAndGetFormattedDate(new Date(), 15));
+        bankTransferData.setExecutionDate(DateUtils.addDaysAndGetFormattedDate(new Date(), executionDateDaysFromNow));
         bankTransferData.setPaymentReason("test reason");
+    }
+
+    private void setBankTransferDataOk(BankTransferData bankTransferData) {
+        setBankTransferDataOk(bankTransferData, 15);
     }
 }
