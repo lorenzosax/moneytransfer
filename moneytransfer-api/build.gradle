@@ -64,6 +64,20 @@ tasks.withType(FindBugs) {
     }
 }
 
+sourceSets {
+    integration {
+        java.srcDir "$projectDir/src/integration/java"
+        resources.srcDir "$projectDir/src/integration/resources"
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
+}
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integration.output.classesDirs
+    classpath = sourceSets.integration.runtimeClasspath
+}
+check.dependsOn integrationTest
+
 dependencies {
     compile             group: 'org.iban4j', name: 'iban4j', version: iban4jVersion
 
@@ -80,4 +94,6 @@ dependencies {
 
 configurations {
     all*.exclude module : 'spring-boot-starter-logging'
+    integrationImplementation.extendsFrom testImplementation
+    integrationRuntime.extendsFrom testRuntime
 }

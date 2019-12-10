@@ -8,10 +8,10 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import com.bank.service.moneytransfer.controller.CustomerController;
 import com.bank.service.moneytransfer.utils.Constant;
-import org.apache.catalina.connector.RequestFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -30,9 +30,8 @@ public class RequestFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterchain)
             throws IOException, ServletException {
-
         MDC.put(Constant.REQUEST_ID, UUID.randomUUID().toString().replace("-", ""));
-        logger.info("Call API: " + ((RequestFacade) request).getRequestURI());
+        logger.info("Call API: " + ((HttpServletRequest) request).getRequestURI());
         filterchain.doFilter(request, response);
     }
 
