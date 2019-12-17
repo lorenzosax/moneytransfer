@@ -98,23 +98,20 @@ public class CustomerControllerIntegrationTest {
                         .andExpect(jsonPath("$.data.commissions.amount", is("0")))
                         .andExpect(jsonPath("$.data.commissions.currencyCode", is(currencyCode)))
                         .andExpect(jsonPath("$.result.outcome", is(OutcomeEnum.SUCCESS.toString())));
-        try {
-            MvcResult result = resultActions.andReturn();
-            String contentAsString = result.getResponse().getContentAsString();
-            TransferVerifyResponse response = objectMapper.readValue(contentAsString, TransferVerifyResponse.class);
 
-            String transactionId = response.getTransaction().getId();
-            logger.info("Transaction id: " + transactionId);
+        MvcResult result = resultActions.andReturn();
+        String contentAsString = result.getResponse().getContentAsString();
+        TransferVerifyResponse response = objectMapper.readValue(contentAsString, TransferVerifyResponse.class);
 
-            mvc.perform(put("/private/cliente/{customerId}/conto/{bankAccountNumber}"
-                    + "/bonifico/{transactionId}/execute", customerId, bankAccountNumber, transactionId))
-                    .andExpect(status().isOk())
-                    .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                    .andExpect(jsonPath("$.result.messages", hasSize(2)))
-                    .andExpect(jsonPath("$.result.outcome", is(OutcomeEnum.SUCCESS.toString())));
-        } catch (NullPointerException e) {
-            logger.error(e.getMessage());
-        }
+        String transactionId = response.getTransaction().getId();
+        logger.info("Transaction id: " + transactionId);
+
+        mvc.perform(put("/private/cliente/{customerId}/conto/{bankAccountNumber}"
+                + "/bonifico/{transactionId}/execute", customerId, bankAccountNumber, transactionId))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.result.messages", hasSize(2)))
+                .andExpect(jsonPath("$.result.outcome", is(OutcomeEnum.SUCCESS.toString())));
     }
 
     public static String asJsonString(final Object obj) {
