@@ -3,7 +3,6 @@ package com.bank.service.moneytransfer.service.implementation;
 import java.math.BigDecimal;
 import javax.validation.Valid;
 
-import com.bank.service.moneytransfer.controller.CustomerController;
 import com.bank.service.moneytransfer.model.entity.BankAccount;
 import com.bank.service.moneytransfer.model.pojo.BankOperationEnum;
 import com.bank.service.moneytransfer.repository.IBankAccountRepository;
@@ -19,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
 public class BankAccountServiceImpl implements IBankAccountService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+    private static final Logger logger = LoggerFactory.getLogger(BankAccountServiceImpl.class);
 
     private IBankAccountRepository bankAccountRepository;
 

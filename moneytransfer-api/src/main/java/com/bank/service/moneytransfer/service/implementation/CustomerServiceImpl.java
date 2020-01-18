@@ -9,7 +9,6 @@ import static com.bank.service.moneytransfer.utils.Constant.MAX_TRANSFER_LIMIT_D
 import static com.bank.service.moneytransfer.utils.DateUtils.addDaysToDate;
 import static com.bank.service.moneytransfer.utils.DateUtils.getDateFromFormattedDate;
 
-import com.bank.service.moneytransfer.controller.CustomerController;
 import com.bank.service.moneytransfer.model.entity.BankAccount;
 import com.bank.service.moneytransfer.model.entity.Customer;
 import com.bank.service.moneytransfer.model.entity.Transaction;
@@ -42,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
 public class CustomerServiceImpl implements ICustomerService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
     private ICustomerRepository customerRepository;
 
