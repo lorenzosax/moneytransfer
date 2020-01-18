@@ -1,6 +1,7 @@
-matrix:
+jobs:
   include:
     - language: node_js
+      os: linux
       node_js: 10.9.0
       before_script:
         - cd moneytransfer-ui
@@ -11,19 +12,20 @@ matrix:
         - npm run build
       deploy:
         - provider: script
-          skip_cleanup: true
+          cleanup: true
           script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist/ root@206.81.16.40:/var/www/html/moneytransfer/public
           on:
             branch: master
 
     - language: java
+      os: linux
       jdk: openjdk8
       install: true
       script:
         - ./gradlew build
       deploy:
         - provider: script
-          skip_cleanup: true
+          cleanup: true
           script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/build/libs/ root@206.81.16.40:/opt/apps/money-transfer
           on:
             branch: master
