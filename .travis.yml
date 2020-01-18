@@ -1,6 +1,7 @@
-matrix:
+jobs:
   include:
     - language: node_js
+      os: linux
       node_js: 10.9.0
       before_script:
         - cd moneytransfer-ui
@@ -17,6 +18,7 @@ matrix:
             branch: master
 
     - language: java
+      os: linux
       jdk: openjdk8
       install: true
       script:

@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.bank.service.moneytransfer.controller.CustomerController;
 import com.bank.service.moneytransfer.model.entity.BankAccount;
 import com.bank.service.moneytransfer.model.entity.Customer;
 import com.bank.service.moneytransfer.model.entity.Transaction;
@@ -26,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
 public class TransactionServiceImpl implements ITransactionService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);
 
     private ITransactionRepository transactionRepository;
 
@@ -63,7 +62,7 @@ public class TransactionServiceImpl implements ITransactionService {
         Transaction trx = null;
         Optional<Transaction> transaction =
                 transactionRepository.findTransactionByTrxIdAndCustomerAndBankAccount(trxId, customer, bankAccount);
-        if (transaction.isPresent()) {
+        if (transaction.isPresent() && transaction.get().getCro() == null) {
             trx = transaction.get();
             trx.setExecutedAt(new Date());
             trx.setCro(UUID.randomUUID().toString().replace("-", ""));

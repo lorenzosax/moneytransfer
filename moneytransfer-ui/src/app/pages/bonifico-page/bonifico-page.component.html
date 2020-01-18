@@ -10,9 +10,9 @@
         <div class="form-group">
           <label for="beneficiary">Beneficiario*</label>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" id="beneficiary" name="beneficiaryName" [(ngModel)]="form.beneficiaryName" autocomplete="off" required>
+            <input minlength="2" maxlength="25" type="text" class="form-control" id="beneficiary" name="beneficiaryName" [(ngModel)]="form.beneficiaryName" autocomplete="off" required>
             <div class="invalid-feedback">
-              Beneficiario obbligatorio.
+              Beneficiario obbligatorio (min-max 2-25 caratteri).
             </div>
           </div>
         </div>
@@ -72,9 +72,9 @@
         <div class="form-group">
           <label for="paymentReason">Causale*</label>
           <div class="input-group mb-3">
-            <textarea maxlength="150" class="form-control" id="paymentReason" style="resize: none" rows="3" name="paymentReason" [(ngModel)]="form.paymentReason" autocomplete="off" required></textarea>
+            <textarea minlength="3" maxlength="150" class="form-control" id="paymentReason" style="resize: none" rows="3" name="paymentReason" [(ngModel)]="form.paymentReason" autocomplete="off" required></textarea>
             <div class="invalid-feedback">
-              Causale obbligatoria (massimo 150 caratteri).
+              Causale obbligatoria (min-max 3-150 caratteri).
             </div>
           </div>
         </div>

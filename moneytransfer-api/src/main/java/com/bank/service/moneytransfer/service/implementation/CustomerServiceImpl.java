@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import com.bank.service.moneytransfer.controller.CustomerController;
+import static com.bank.service.moneytransfer.utils.Constant.MAX_TRANSFER_LIMIT_DAYS;
+import static com.bank.service.moneytransfer.utils.DateUtils.addDaysToDate;
+import static com.bank.service.moneytransfer.utils.DateUtils.getDateFromFormattedDate;
+
 import com.bank.service.moneytransfer.model.entity.BankAccount;
 import com.bank.service.moneytransfer.model.entity.Customer;
 import com.bank.service.moneytransfer.model.entity.Transaction;
@@ -38,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
 public class CustomerServiceImpl implements ICustomerService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
     private ICustomerRepository customerRepository;
 
@@ -61,7 +64,8 @@ public class CustomerServiceImpl implements ICustomerService {
                     + " " + customerBankAccount.getCustomer().getLastname());
             transferPrepareInfo.setAccountNumber(customerBankAccount.getBankAccount().getAccountNumber());
             transferPrepareInfo.setTodayDate(DateUtils.getFormattedDate(today));
-            transferPrepareInfo.setTransferLimitDate(DateUtils.addDaysAndGetFormattedDate(new Date(), 30));
+            transferPrepareInfo.setTransferLimitDate(
+                    DateUtils.addDaysAndGetFormattedDate(new Date(), MAX_TRANSFER_LIMIT_DAYS));
             transferPrepareResponse.setData(transferPrepareInfo);
         } else {
             transferPrepareResponse.setErrorResponse();
@@ -76,7 +80,7 @@ public class CustomerServiceImpl implements ICustomerService {
         TransferVerifyResponse transferVerifyResponse = new TransferVerifyResponse();
         CustomerBankAccount customerBankAccount = getCustomerBankAccount(customerId, bankAccountNumber);
         try {
-            if (customerBankAccount != null) {
+            if (customerBankAccount != null && isValidExecutionDate(bankTransferData.getExecutionDate())) {
                 BankAccount bankAccount = customerBankAccount.getBankAccount();
                 BigDecimal amountToTransfer = new BigDecimal(bankTransferData.getAmount().getCurrency());
                 BigDecimal availableBalance = bankAccount.getAvailableBalance();
@@ -114,7 +118,8 @@ public class CustomerServiceImpl implements ICustomerService {
                 }
             } else {
                 logger.info("CustomerBankAccount obj not found for customerId="
-                        + customerId + " bankAccountNumber=" + bankAccountNumber);
+                        + customerId + " bankAccountNumber=" + bankAccountNumber
+                        + " or executionDate is invalid");
                 transferVerifyResponse.setErrorResponse();
             }
         } catch (IbanFormatException
@@ -123,10 +128,6 @@ public class CustomerServiceImpl implements ICustomerService {
             logger.error("Invalid iban parameter " + bankTransferData.getBeneficiaryIban());
             transferVerifyResponse.setErrorResponse();
             transferVerifyResponse.addMessages("IBAN non valido!");
-        } catch (Exception e) {
-            logger.error("Generic Error:", e);
-            transferVerifyResponse.setErrorResponse();
-            transferVerifyResponse.addMessages("Servizio momentaneamente non disponibile, riprovare più tardi.");
         }
         return transferVerifyResponse;
     }
@@ -159,7 +160,8 @@ public class CustomerServiceImpl implements ICustomerService {
         return transferExecuteResponse;
     }
 
-    private CustomerBankAccount getCustomerBankAccount(Long customerId, String bankAccountNumber) {
+    @Override
+    public CustomerBankAccount getCustomerBankAccount(Long customerId, String bankAccountNumber) {
         CustomerBankAccount customerBankAccount = null;
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
         Customer customer;
@@ -187,5 +189,11 @@ public class CustomerServiceImpl implements ICustomerService {
             }
         }
         return bankAccount;
+    }
+
+    private boolean isValidExecutionDate(String stringExecutionDate) {
+        Date limitDate = addDaysToDate(new Date(), MAX_TRANSFER_LIMIT_DAYS);
+        Date executionDate = getDateFromFormattedDate(stringExecutionDate, null);
+        return executionDate.before(limitDate);
     }
 }
