@@ -21,12 +21,13 @@ public class BankTransferData implements Serializable {
             message = "Date format error: use dd/MM/yyyy")
     private String executionDate;
     @NotBlank(message = "beneficiaryName cannot be missing or empty")
+    @Size(min = 2, max = 25, message = "Beneficiary Name must be between 2 and 25 chars")
     private String beneficiaryName;
     @NotNull(message = "beneficiaryIban cannot be missing or empty")
     @Size(min = 15, max = 32, message = "Invalid Iban")
     private String beneficiaryIban;
     @NotEmpty(message = "paymentReason cannot be missing or empty")
-    @Size(min = 3, message = "At least 3 chars")
+    @Size(min = 3, max = 150, message = "Payment Reason must be between 3 and 150 chars")
     private String paymentReason;
 
     public Amount getAmount() {
