@@ -15,7 +15,7 @@ jobs:
           cleanup: true
           script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist/ root@206.81.16.40:/var/www/html/moneytransfer/public
           on:
-            branch: master
+            branch: unit-testing
 
     - language: java
       os: linux
@@ -28,7 +28,7 @@ jobs:
           cleanup: true
           script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/build/libs/ root@206.81.16.40:/opt/apps/money-transfer
           on:
-            branch: master
+            branch: unit-testing
       after_deploy:
         - scripts/run.sh
 
