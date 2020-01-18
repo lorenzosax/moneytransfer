@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>test_suite_moneytransfer</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">success_send_money</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>https://app.lorenzogagliani.it/bonifico<datalist><option>https://app.lorenzogagliani.it/bonifico</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=beneficiary<datalist><option>id=beneficiary</option><option>name=beneficiaryName</option><option>//input[@id='beneficiary']</option><option>//input</option><option>css=#beneficiary</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=beneficiary<datalist><option>id=beneficiary</option><option>name=beneficiaryName</option><option>//input[@id='beneficiary']</option><option>//input</option><option>css=#beneficiary</option></datalist></td><td>Mario Rossi</td>
+</tr>
+<tr><td>type</td><td>id=iban<datalist><option>id=iban</option><option>name=beneficiaryIban</option><option>//input[@id='iban']</option><option>//div[3]/div/input</option><option>css=#iban</option></datalist></td><td>IT32D0300203280576893493775</td>
+</tr>
+<tr><td>click</td><td>id=amount<datalist><option>id=amount</option><option>name=currency</option><option>//input[@id='amount']</option><option>//div[4]/div/input</option><option>css=#amount</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=amount<datalist><option>id=amount</option><option>name=currency</option><option>//input[@id='amount']</option><option>//div[4]/div/input</option><option>css=#amount</option></datalist></td><td>234</td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data di esecuzione*'])[1]/following::span[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data di esecuzione*'])[1]/following::span[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Importo obbligatorio.'])[1]/following::span[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data di esecuzione obbligatoria.'])[1]/preceding::span[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Causale*'])[1]/preceding::span[1]</option><option>//div[5]/div/div/span</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>css=path<datalist><option>css=path</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=paymentReason<datalist><option>id=paymentReason</option><option>name=paymentReason</option><option>//textarea[@id='paymentReason']</option><option>//textarea</option><option>css=#paymentReason</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=paymentReason<datalist><option>id=paymentReason</option><option>name=paymentReason</option><option>//textarea[@id='paymentReason']</option><option>//textarea</option><option>css=#paymentReason</option></datalist></td><td>test causale provv</td>
+</tr>
+<tr><td>clickAndWait</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Causale obbligatoria (massimo 150 caratteri).'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Causale obbligatoria (massimo 150 caratteri).'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Causale*'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Verifica i dati e continua'])[1]/preceding::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Mario Rossi'])[1]/preceding::button[1]</option><option>xpath=//*/text()[normalize-space(.)='PROSEGUI']/parent::*</option><option>//button[@type='submit']</option><option>//button</option><option>css=button.btn.btn-success</option></datalist></td><td>2</td>
+</tr>
+<tr><td>clickAndWait</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='INDIETRO'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='INDIETRO'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='test causale provv'])[1]/following::button[2]</option><option>xpath=//*/text()[normalize-space(.)='AVANTI']/parent::*</option><option>//button[2]</option></datalist></td><td>2</td>
+</tr>
+<tr><td>clickAndWait</td><td>xpath=.//button[text()='CONFERMA' and contains(@class, 'btn-success')]<datalist><option>xpath=(/html/body/app-root/div/app-bonifico-page/div/div/div[2]/div[7]/button[2])</option><option>xpath=/html/body/app-root/div/app-bonifico-page/div/div/div[2]/div[7]/button[2]</option><option>xpath=//*[@class='btn btn-success']//*[text()='CONFERMA']</option><option>xpath=.//button[text()='CONFERMA']</option><option>xpath=.//button[text()='CONFERMA'][@class='btn btn-success']</option><option>xpath=.//button[@class='btn btn-success']</option><option>xpath=.//button[text()='CONFERMA1' AND @class='btn btn-success']</option><option>xpath=.//button[text()='CONFERMA' AND @class='btn btn-success']</option><option>xpath=.//button[text()='CONFERMA' AND @class='btn-success']</option><option>xpath=.//button[text()='CONFERMA' AND contains(@class, 'btn-success')]</option><option>xpath=.//button[text()='CONFERMA' and contains(@class, 'btn-success')]</option></datalist></td><td>10</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">warning_send_money_min_amount_one</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>https://app.lorenzogagliani.it/bonifico<datalist><option>https://app.lorenzogagliani.it/bonifico</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=beneficiary<datalist><option>id=beneficiary</option><option>name=beneficiaryName</option><option>//input[@id='beneficiary']</option><option>//input</option><option>css=#beneficiary</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=beneficiary<datalist><option>id=beneficiary</option><option>name=beneficiaryName</option><option>//input[@id='beneficiary']</option><option>//input</option><option>css=#beneficiary</option></datalist></td><td>Mario Rossi</td>
+</tr>
+<tr><td>type</td><td>id=iban<datalist><option>id=iban</option><option>name=beneficiaryIban</option><option>//input[@id='iban']</option><option>//div[3]/div/input</option><option>css=#iban</option></datalist></td><td>IT32D0300203280576893493775</td>
+</tr>
+<tr><td>click</td><td>id=amount<datalist><option>id=amount</option><option>name=currency</option><option>//input[@id='amount']</option><option>//div[4]/div/input</option><option>css=#amount</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=amount<datalist><option>id=amount</option><option>name=currency</option><option>//input[@id='amount']</option><option>//div[4]/div/input</option><option>css=#amount</option></datalist></td><td>0</td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data di esecuzione*'])[1]/following::span[1]<datalist><option>css=path</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data di esecuzione*'])[1]/following::span[1]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>css=path<datalist><option>css=path</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=paymentReason<datalist><option>id=paymentReason</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=paymentReason<datalist><option>id=paymentReason</option></datalist></td><td>test casuale con 0 euro</td>
+</tr>
+<tr><td>clickAndWait</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Causale obbligatoria (massimo 150 caratteri).'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Causale obbligatoria (massimo 150 caratteri).'])[1]/following::button[1]</option></datalist></td><td>2</td>
+</tr>
+<tr><td>clickAndWait</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='INDIETRO'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='INDIETRO'])[1]/following::button[1]</option></datalist></td><td>5</td>
+</tr>
+<tr><td>waitForElementPresent</td><td>xpath=//div[contains(@class, 'alert-warning')]<datalist><option>xpath=.//div[contains(@class, 'alert-warning')]</option><option>xpath=/html/body/app-root/div/app-bonifico-page/div/div/div[2]/app-summary-bonifico/div</option><option>xpath=//div[class</option><option>xpath=//div[contains(@class, 'alert-warning')]</option><option>xpath=//div[contains(@class, 'alert-ewarning')]</option></datalist></td><td>1</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">warning_send_money_limit_exceeded</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>https://app.lorenzogagliani.it/bonifico<datalist><option>https://app.lorenzogagliani.it/bonifico</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=beneficiary<datalist><option>id=beneficiary</option><option>name=beneficiaryName</option><option>//input[@id='beneficiary']</option><option>//input</option><option>css=#beneficiary</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=beneficiary<datalist><option>id=beneficiary</option><option>name=beneficiaryName</option><option>//input[@id='beneficiary']</option><option>//input</option><option>css=#beneficiary</option></datalist></td><td>Mario Rossi</td>
+</tr>
+<tr><td>type</td><td>id=iban<datalist><option>id=iban</option><option>name=beneficiaryIban</option><option>//input[@id='iban']</option><option>//div[3]/div/input</option><option>css=#iban</option></datalist></td><td>IT32D0300203280576893493775</td>
+</tr>
+<tr><td>click</td><td>id=amount<datalist><option>id=amount</option><option>name=currency</option><option>//input[@id='amount']</option><option>//div[4]/div/input</option><option>css=#amount</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=amount<datalist><option>id=amount</option><option>name=currency</option><option>//input[@id='amount']</option><option>//div[4]/div/input</option><option>css=#amount</option></datalist></td><td>11000</td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data di esecuzione*'])[1]/following::span[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data di esecuzione*'])[1]/following::span[1]</option><option>css=path</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>css=path<datalist><option>css=path</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=paymentReason<datalist><option>id=paymentReason</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=paymentReason<datalist><option>id=paymentReason</option></datalist></td><td>test casuale con 11000 euro (limite da eccedere)</td>
+</tr>
+<tr><td>clickAndWait</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Causale obbligatoria (massimo 150 caratteri).'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Causale obbligatoria (massimo 150 caratteri).'])[1]/following::button[1]</option></datalist></td><td>2</td>
+</tr>
+<tr><td>clickAndWait</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='INDIETRO'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='INDIETRO'])[1]/following::button[1]</option></datalist></td><td>5</td>
+</tr>
+<tr><td>waitForElementPresent</td><td>xpath=//div[contains(@class, 'alert-warning')]<datalist><option>xpath=//div[contains(@class, 'alert-warning')]</option><option>xpath=.//div[contains(@class, 'alert-warning')]</option><option>xpath=/html/body/app-root/div/app-bonifico-page/div/div/div[2]/app-summary-bonifico/div</option><option>xpath=//div[class</option><option>xpath=//div[contains(@class, 'alert-ewarning')]</option></datalist></td><td>1</td>
+</tr>
+</tbody></table>
+</body>
+</html>
