@@ -115,7 +115,15 @@ public class CustomerServiceUnitTest {
         Assert.assertEquals("wrong iban didn't generate error", OutcomeEnum.ERROR,
                 transferVerifyResponse4.getResult().getOutcome());
 
-        // Fifth test (White box)
+        // Fifth test (Black box)
+        setBankTransferDataOk(bankTransferData, 31);
+        TransferVerifyResponse transferVerifyResponse7 =
+                customerService.executeTransferVerify(customerId2, bankAccountNumber2, bankTransferData);
+        Assert.assertEquals("Should be fail because execution date is invalid",
+                OutcomeEnum.ERROR,
+                transferVerifyResponse7.getResult().getOutcome());
+
+        // Sixth test (White box)
         setBankTransferDataOk(bankTransferData);
         bankTransferData.getAmount().setCurrency("-10");
         TransferVerifyResponse transferVerifyResponse5 =
@@ -124,20 +132,12 @@ public class CustomerServiceUnitTest {
                 OutcomeEnum.WARNING,
                 transferVerifyResponse5.getResult().getOutcome());
 
-        // Sixth test (White box)
+        // Seventh test (White box)
         TransferVerifyResponse transferVerifyResponse6 =
                 customerService.executeTransferVerify(customerId2, "fake", bankTransferData);
         Assert.assertEquals("Should be fail because fake account number",
                 OutcomeEnum.ERROR,
                 transferVerifyResponse6.getResult().getOutcome());
-
-        // Seventh test (Black box)
-        setBankTransferDataOk(bankTransferData, 31);
-        TransferVerifyResponse transferVerifyResponse7 =
-                customerService.executeTransferVerify(customerId2, bankAccountNumber2, bankTransferData);
-        Assert.assertEquals("Should be fail because execution date is invalid",
-                OutcomeEnum.ERROR,
-                transferVerifyResponse7.getResult().getOutcome());
     }
 
     @Test
