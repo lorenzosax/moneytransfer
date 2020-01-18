@@ -12,7 +12,7 @@ jobs:
         - npm run build
       deploy:
         - provider: script
-          cleanup: true
+          cleanup: false
           script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-ui/dist/ root@206.81.16.40:/var/www/html/moneytransfer/public
           on:
             branch: unit-testing
@@ -25,7 +25,7 @@ jobs:
         - ./gradlew build
       deploy:
         - provider: script
-          cleanup: true
+          cleanup: false
           script: rsync --recursive --delete --quiet $TRAVIS_BUILD_DIR/moneytransfer-api/build/libs/ root@206.81.16.40:/opt/apps/money-transfer
           on:
             branch: unit-testing
