@@ -29,17 +29,19 @@ the first contain the backend code (REST API) and the second contain the client 
 
 Project requires [Gradle](https://services.gradle.org/distributions/gradle-5.6.4-bin.zip) v. 5.6.4  to run.
 
+
+#### Backend
 On root folder run:
 ```sh
 $ ./gradlew bootJar
 ```
-
-Backend: the following command will generate the _moneytransfer.jar file_ that can deploy using following command:
+that will generate the _moneytransfer.jar_ file that can be deployed using following command:
 ```sh
 $ java -jar moneytransfer.jar
 ```
 
-Frontend: the following command will generate frontend resources for production:
+#### Frontend 
+The following command will generate frontend resources for production:
 ```sh
 $ cd moneytransfer-ui
 $ npm run build
@@ -48,17 +50,19 @@ $ npm run build
 ### Development mode
 
 For _Frontend_ project you can follow README.md in __moneytransfer-ui__ module. 
+
 For _Backend_ you can run the springboot application running this command from __moneytransfer-api__ module:
 ```sh
 $ ./gradlew bootRun
 ```
+
 In the end the two applications will be served in two different ports:
 
 Frontend:   `http://localhost:4200`
 
 Backend:    `http://localhost:8080`
 
-### _Database access:_
+### Database access
 The datasource driver, url, db name and password can be configured in its configuration file (production and development config) that are located:
 - Production: moneytransfer/moneytransfer-api/src/main/resources/application-prod.yml
 - Develop:    moneytransfer/moneytransfer-api/src/main/resources/application.yml
